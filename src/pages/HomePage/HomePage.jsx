@@ -62,7 +62,7 @@ function HomePage() {
                             </ul>
                         </details>
                     </li>
-                    
+
                 </ul>
 
             </div>
