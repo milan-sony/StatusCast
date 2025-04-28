@@ -54,10 +54,7 @@ function IndexPage() {
 
             </div>
 
-
-
         </>
-
     )
 }
 
