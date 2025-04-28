@@ -1,7 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 
 function HomePage() {
+
+    const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "light")
+
+    useEffect(() => {
+        localStorage.setItem("theme", theme)
+        const localTheme = localStorage.getItem("theme")
+        document.querySelector("html").setAttribute("data-theme", localTheme)
+    }, [theme])
+
+    const toggleTheme = () => {
+        setTheme(theme === "light" ? "dark" : "light")
+    }
+
     return (
         <div className="navbar bg-base-100 shadow-sm">
             <div className="dropdown">
@@ -21,8 +34,20 @@ function HomePage() {
             </div>
             <div className="flex-none">
                 <ul className="menu menu-horizontal px-1">
-                    <li><a>Link</a></li>
-                    <li>
+
+                    <label className="swap swap-rotate">
+                        {/* this hidden checkbox controls the state */}
+                        <input type="checkbox" onChange={toggleTheme} />
+
+                        {/* sun icon */}
+                        <img className='size-5 swap-on' src="/sun.png" alt="sun" />
+
+                        {/* moon icon */}
+                        <img className='size-5 swap-off' src="/moon.png" alt="moon" />
+
+                    </label>
+
+                    <li className='ml-4'>
                         <details>
                             <summary>Parent</summary>
                             <ul className="bg-base-100 rounded-t-none p-2">
