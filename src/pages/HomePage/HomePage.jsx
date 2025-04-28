@@ -29,12 +29,13 @@ function HomePage() {
                     <li><a>About</a></li>
                 </ul>
             </div>
+
             <div className="flex-1">
                 <Link to={"/"} className="btn btn-ghost text-xl">StatusCast</Link>
             </div>
+
             <div className="flex-none">
                 <ul className="menu menu-horizontal px-1">
-
                     <label className="swap swap-rotate">
                         {/* this hidden checkbox controls the state */}
                         <input type="checkbox" onChange={toggleTheme} />
@@ -44,9 +45,7 @@ function HomePage() {
 
                         {/* moon icon */}
                         <img className='size-5 swap-off' src="/moon.png" alt="moon" />
-
                     </label>
-
                     <li className='ml-4'>
                         <details>
                             <summary>Parent</summary>
@@ -58,6 +57,7 @@ function HomePage() {
                     </li>
                 </ul>
             </div>
+
         </div>
     )
 }
