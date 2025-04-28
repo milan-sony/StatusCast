@@ -1,9 +1,10 @@
 import React from 'react'
+import Router from './router/Router'
 
 function App() {
   return (
     <div>
-      <button className="btn btn-primary">Primary</button>
+      <Router />
     </div>
   )
 }
