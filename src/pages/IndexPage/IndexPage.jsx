@@ -1,33 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router'
+import Navbar from '../../components/Navbar/Navbar'
 
 function IndexPage() {
-
-    const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "light")
-
-    useEffect(() => {
-        localStorage.setItem("theme", theme)
-        const localTheme = localStorage.getItem("theme")
-        document.querySelector("html").setAttribute("data-theme", localTheme)
-    }, [theme])
-
-    const toggleTheme = () => {
-        setTheme(theme === "light" ? "dark" : "light")
-    }
 
     return (
         <>
             <div className="w-full h-screen overflow-hidden bg-base-200 flex flex-col">
 
-                {/* Theme Toggle */}
-                <div className="flex justify-end p-4">
-                    <label className="swap swap-rotate">
-                        <input type="checkbox" onChange={toggleTheme} />
-                        {/* Sun icon */}
-                        <img className="size-5 swap-on" src="/sun.png" alt="sun" />
-                        <img className="size-5 swap-off" src="/moon.png" alt="moon" />
-                    </label>
-                </div>
+                <Navbar />
 
                 {/* Main Content */}
                 <div className="flex-grow flex justify-center items-center">
