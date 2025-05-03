@@ -36,7 +36,7 @@ function Navbar() {
                             </label>
                             <li className="ml-4">
                                 <details>
-                                    <summary>Parent</summary>
+                                    <summary>Settings</summary>
                                     <ul className="bg-base-100 rounded-t-none p-2">
                                         <li><Link to="/link1">Link 1</Link></li>
                                         <li><Link to="/link2">Link 2</Link></li>
