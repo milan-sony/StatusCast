@@ -8,7 +8,7 @@ function SignupPage() {
             <div className="w-full h-screen overflow-hidden bg-base-200 flex flex-col">
                 <Navbar />
                 <div className="hero h-screen">
-                    <div className="hero-content flex-col lg:flex-row-reverse max-w-4xl">
+                    <div className="hero-content flex-col lg:flex-row-reverse w-full">
                         <div className="text-center lg:text-left">
                             <h1 className="text-5xl font-bold font-[poppins]">Signup</h1>
                             <p className="py-6 font-[roboto]">
@@ -29,7 +29,7 @@ function SignupPage() {
                                     <label className="label font-[roboto]">Password</label>
                                     <input type="password" className="input" placeholder="Password" />
                                     <div><a className="link link-hover font-[roboto]">Forgot password?</a></div>
-                                    <button className="btn btn-primary btn-xs sm:btn-sm md:btn-md font-[roboto]">Login</button>
+                                    <button className="btn btn-primary btn-sm md:btn-md font-[roboto]">Login</button>
                                     <p className='mt-4 font-[roboto]'>
                                         Already have an account? <Link to={"/login"} className='link font-[roboto]'>Login</Link>
                                     </p>
