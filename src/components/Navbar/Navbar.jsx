@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import useTheme from '../../hooks/useTheme'
+import { MoonIcon, SunIcon } from 'lucide-react'
 
 function Navbar() {
     const { theme, toggleTheme } = useTheme()
@@ -30,8 +31,8 @@ function Navbar() {
                         <ul className="menu menu-horizontal px-1">
                             <label className="swap swap-rotate">
                                 <input type="checkbox" onChange={toggleTheme} checked={theme === 'dark'} />
-                                <img className="size-5 swap-on" src="/sun.png" alt="sun" />
-                                <img className="size-5 swap-off" src="/moon.png" alt="moon" />
+                                <SunIcon className='size-5 swap-on' />
+                                <MoonIcon className='size-5 swap-off' />
                             </label>
                             <li className="ml-4">
                                 <details>
