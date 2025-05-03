@@ -25,7 +25,7 @@ function IndexPage() {
                         <div className="text-center md:text-left">
                             <h1 className="text-4xl md:text-5xl font-bold font-[poppins]">StatusCast</h1>
                             <p className="py-4 text-lg font-[poppins]">“Broadcast Your Presence, Online”</p>
-                            <Link to="/home" className="btn btn-primary font-[roboto]">
+                            <Link to="/login" className="btn btn-primary font-[roboto]">
                                 Get Started
                             </Link>
                         </div>
