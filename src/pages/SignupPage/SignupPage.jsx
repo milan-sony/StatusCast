@@ -10,9 +10,9 @@ function SignupPage() {
                 <div className="hero h-screen">
                     <div className="hero-content flex-col lg:flex-row-reverse max-w-4xl">
                         <div className="text-center lg:text-left">
-                            <h1 className="text-5xl font-bold font-[poppins]">Signup!</h1>
+                            <h1 className="text-5xl font-bold font-[poppins]">Signup</h1>
                             <p className="py-6 font-[roboto]">
-                                Signup to StatusCast
+                                Get started with your free account!
                             </p>
                         </div>
                         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
