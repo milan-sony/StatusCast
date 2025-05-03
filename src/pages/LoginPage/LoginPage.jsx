@@ -1,8 +1,47 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../../components/Navbar/Navbar'
 import { Link } from 'react-router'
+import toast from 'react-hot-toast'
 
 function LoginPage() {
+
+    const [formData, setFormData] = useState({
+        email: "",
+        password: ""
+    })
+
+    const validateForm = () => {
+        // Check for empty fields
+        const { email, password } = formData // destructuring
+
+        if (!email) {
+            return toast.error("Email is required")
+        }
+        if (!/\S+@\S+\.\S+/.test(email)) {
+            return toast.error("Invalid email address")
+        }
+        if (!password) {
+            return toast.error("Password is required")
+        }
+        if (password.length < 6) {
+            return toast.error("Password must be at least 6 characters")
+        }
+
+        return true
+    }
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value })
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const success = validateForm()
+        if (success === true) {
+            console.log(formData)
+        }
+    }
+
     return (
         <>
             <div className="w-full h-screen overflow-hidden bg-base-200 flex flex-col">
@@ -18,12 +57,12 @@ function LoginPage() {
                         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                             <div className="card-body">
                                 <fieldset className="fieldset">
-                                    <label className="label font-[roboto]">Email</label>
-                                    <input type="email" className="input" placeholder="Email" />
-                                    <label className="label font-[roboto]">Password</label>
-                                    <input type="password" className="input" placeholder="Password" />
+                                    <label className="label font-[roboto]"><span className='text-red-500'>*</span>Email</label>
+                                    <input type="email" className="input" placeholder="Email" name='email' value={formData.email} onChange={handleChange} />
+                                    <label className="label font-[roboto]"><span className='text-red-500'>*</span>Password</label>
+                                    <input type="password" className="input" placeholder="Password" name='password' value={formData.password} onChange={handleChange} />
                                     <div><a className="link link-hover font-[roboto]">Forgot password?</a></div>
-                                    <button className="btn btn-primary btn-sm md:btn-md font-[roboto]">Login</button>
+                                    <button className="btn btn-primary btn-sm md:btn-md font-[roboto]" onClick={handleSubmit}>Login</button>
                                     <p className='mt-4 font-[roboto]'>
                                         Don't have an account? <Link to={"/signup"} className='link font-[roboto]'>Signup</Link>
                                     </p>
