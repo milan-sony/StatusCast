@@ -6,7 +6,7 @@ import { MoonIcon, SunIcon } from 'lucide-react'
 function Navbar() {
     const { theme, toggleTheme } = useTheme()
 
-    const authUser = true
+    const authUser = false
 
     return (
         <div className="navbar bg-base-200 shadow-sm">
@@ -52,10 +52,10 @@ function Navbar() {
                         <Link to="/" className="btn btn-ghost text-xl">StatusCast</Link>
                     </div>
                     <div className="flex-none">
-                        <label className="swap swap-rotate">
+                        <label className="swap swap-rotate mr-4">
                             <input type="checkbox" onChange={toggleTheme} checked={theme === 'dark'} />
-                            <img className="size-5 swap-on" src="/sun.png" alt="sun" />
-                            <img className="size-5 swap-off" src="/moon.png" alt="moon" />
+                            <SunIcon className='size-5 swap-on' />
+                            <MoonIcon className='size-5 swap-off' />
                         </label>
                     </div>
                 </>
