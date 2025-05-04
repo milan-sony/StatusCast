@@ -6,7 +6,7 @@ export const userAuthStore = create((set) => ({
     accessToken: null,
 
     setAuth: (user, accessToken) => set({ user, accessToken }),
-    setToken: (accessToken) => set({ accessToken }),
+    setAccessToken: (accessToken) => set({ accessToken }),
 
     logout: async () => {
         await axiosInstance.post("/auth/logout")
