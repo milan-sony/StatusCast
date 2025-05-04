@@ -5,14 +5,15 @@ import HomePage from '../pages/HomePage/HomePage';
 import PageNotFound from '../pages/PageNotFound/PageNotFound';
 import SignupPage from '../pages/SignupPage/SignupPage';
 import LoginPage from '../pages/LoginPage/LoginPage';
+import ProtectedRoute from '../utils/ProtectRoute';
 
 function Router() {
     return (
         <Routes>
             <Route path='/' element={<IndexPage />} />
-            <Route path='/home' element={<HomePage />} />
             <Route path='/signup' element={<SignupPage />} />
             <Route path='/login' element={<LoginPage />} />
+            <Route path='/home' element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
             <Route path='*' element={<PageNotFound />} />
         </Routes>
     )
