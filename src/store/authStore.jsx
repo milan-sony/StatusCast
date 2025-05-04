@@ -10,7 +10,6 @@ export const userAuthStore = create((set) => ({
     setAccessToken: (accessToken) => set({ accessToken }),
 
     signup: async (data, navigate) => {
-
         try {
             const res = await axiosInstance.post("/auth/signup", data)
             if (res.data?.status === 201) {
