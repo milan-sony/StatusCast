@@ -13,8 +13,10 @@ export const userAuthStore = create((set) => ({
 
         try {
             const res = await axiosInstance.post("/auth/signup", data)
-            toast.success(res.data?.message || "Account successfully created!")
-            navigate("/login")
+            if (res.data?.status === 201) {
+                toast.success(res.data?.message || "Account successfully created!")
+                navigate("/login")
+            }
         } catch (error) {
             toast.error(error.response?.data?.message)
         }
