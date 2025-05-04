@@ -13,8 +13,8 @@ axiosInstance.interceptors.request.use((config) => {
     const token = userAuthStore.getState().accessToken
     if (token) {
         config.headers['Authorization'] = `Bearer ${token}`
-        return config
     }
+    return config
 })
 
 // Add a response interceptor - catching and handling errors
