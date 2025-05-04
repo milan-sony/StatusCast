@@ -1,10 +1,10 @@
 import axios from 'axios'
-import { userAuthStore } from '../store/auth';
+import { userAuthStore } from '../store/authStore'
 
 const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_APP_API_URL,
     withCredentials: true, // Send cookies with every single request
-});
+})
 
 // Axios interceptors ref. link : https://medium.com/@barisberkemalkoc/axios-interceptor-intelligent-db46653b7303
 
