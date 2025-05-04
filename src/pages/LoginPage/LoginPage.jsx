@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import Navbar from '../../components/Navbar/Navbar'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import toast from 'react-hot-toast'
+import { userAuthStore } from '../../store/authStore'
 
 function LoginPage() {
+
+    const { login } = userAuthStore()
 
     const [formData, setFormData] = useState({
         email: "",
@@ -34,11 +37,13 @@ function LoginPage() {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
+    const navigate = useNavigate();
+
     const handleSubmit = (e) => {
         e.preventDefault()
         const success = validateForm()
         if (success === true) {
-            console.log(formData)
+            login(formData, navigate)
         }
     }
 
