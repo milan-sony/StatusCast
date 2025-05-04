@@ -6,6 +6,7 @@ export const userAuthStore = create((set) => ({
 
     user: null,
     accessToken: null,
+    isUserAuthenticated: false,
 
     setAuth: (user, accessToken) => set({ user, accessToken }),
     setAccessToken: (accessToken) => set({ accessToken }),
@@ -29,7 +30,8 @@ export const userAuthStore = create((set) => ({
             if (res.data?.status === 200) {
                 set({
                     user: res.data?.data,
-                    accessToken: res.data?.token
+                    accessToken: res.data?.token,
+                    isUserAuthenticated: true
                 })
                 toast.success(res.data?.message || "Login successfull")
                 navigate("/home")
@@ -40,8 +42,42 @@ export const userAuthStore = create((set) => ({
         }
     },
 
-    logout: async () => {
-        await axiosInstance.post("/auth/logout")
-        set({ user: null, accessToken: null })
+    checkAuth: async () => {
+        try {
+            const res = await axiosInstance.get("/auth/check")
+            console.log(res)
+            set({
+                isUserAuthenticated: true
+            })
+        } catch (error) {
+
+        }
+    },
+
+    profile: async () => {
+        try {
+            const res = await axiosInstance.post("/auth/profile")
+            console.log("Profile res", res)
+        } catch (error) {
+            console.error(error)
+        }
+    },
+
+    logout: async (navigate) => {
+        try {
+            const res = await axiosInstance.post("/auth/logout")
+            if (res.data?.status === 200) {
+                set({
+                    user: null,
+                    accessToken: null,
+                    isUserAuthenticated: false
+                })
+                toast.success(res.data?.message || "Successfully logged out")
+                navigate("/login")
+            }
+
+        } catch (error) {
+            console.error("Error logging out the user, ", error.response?.data?.message || "Error logging out the user")
+        }
     }
 }))

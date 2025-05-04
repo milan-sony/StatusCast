@@ -11,6 +11,7 @@ const axiosInstance = axios.create({
 // Add a request interceptor -  include an authentication token in every request’s
 axiosInstance.interceptors.request.use((config) => {
     const token = userAuthStore.getState().accessToken
+    console.log("Axios token", token)
     if (token) {
         config.headers['Authorization'] = `Bearer ${token}`
     }
@@ -25,7 +26,9 @@ axiosInstance.interceptors.response.use( // Registers an interceptor for all res
         if (err.response?.status === 401 && !original._retry) { // Check if the error is 401 Unauthorized and ensure it hasn’t been retried already (to prevent infinite loops)
             original._retry = true // Mark this request as "retried" to avoid retrying again if refresh fail
             try {
+                console.log("Axios import.meta.env.VITE_APP_API_URL", import.meta.env.VITE_APP_API_URL)
                 const { data } = await axios.post(import.meta.env.VITE_APP_API_URL, '/auth/refresh', {}, { withCredentials: true }) // Send a request to refresh the access token
+                console.log("axios data, ", data)
                 userAuthStore.getState().setAccessToken(data.accessToken) // Updates the new accessToken in the Zustand store (userAuthStore) used for managing auth state
                 original.headers['Authorization'] = `Bearer ${data.accessToken}` // Updates the original failed request with the new access token
                 return axiosInstance(original) // Retries the original request with the updated token
