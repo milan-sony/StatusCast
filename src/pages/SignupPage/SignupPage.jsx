@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import Navbar from '../../components/Navbar/Navbar'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import toast from 'react-hot-toast'
 import { userAuthStore } from '../../store/authStore'
-import { useNavigate } from 'react-router'
 
 function SignupPage() {
 
@@ -43,7 +42,7 @@ function SignupPage() {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const handleSubmit = (e) => {
         e.preventDefault()
