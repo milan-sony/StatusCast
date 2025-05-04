@@ -2,15 +2,23 @@ import React from 'react'
 import { Link } from 'react-router'
 import useTheme from '../../hooks/useTheme'
 import { MoonIcon, SunIcon } from 'lucide-react'
+import { userAuthStore } from '../../store/authStore'
+import { useNavigate } from 'react-router'
 
 function Navbar() {
     const { theme, toggleTheme } = useTheme()
 
-    const authUser = false
+    const { isUserAuthenticated, logout } = userAuthStore()
+
+    const navigate = useNavigate()
+
+    const handleLogout = () => {
+        logout(navigate)
+    }
 
     return (
         <div className="navbar bg-base-200 shadow-sm">
-            {authUser ? (
+            {isUserAuthenticated ? (
                 <>
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
@@ -38,8 +46,8 @@ function Navbar() {
                                 <details>
                                     <summary>Settings</summary>
                                     <ul className="bg-base-100 rounded-t-none p-2">
-                                        <li><Link to="/link1">Link 1</Link></li>
-                                        <li><Link to="/link2">Link 2</Link></li>
+                                        <li><Link to="/link1">Profile</Link></li>
+                                        <li><button onClick={handleLogout}>Logout</button></li>
                                     </ul>
                                 </details>
                             </li>
