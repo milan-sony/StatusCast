@@ -8,7 +8,8 @@ export const userAuthStore = create((set) => ({
     accessToken: null,
     isUserAuthenticated: false,
 
-    setAuth: (user, accessToken) => set({ user, accessToken }),
+    setUser: (user) => set({ user }),
+
     setAccessToken: (accessToken) => set({ accessToken }),
 
     checkAuth: async () => {
