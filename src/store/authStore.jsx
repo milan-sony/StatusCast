@@ -5,11 +5,7 @@ import axiosInstance from "../lib/Axios"
 export const userAuthStore = create((set) => ({
 
     user: null,
-    accessToken: null,
     isUserAuthenticated: false,
-
-    setAuth: (user, accessToken) => set({ user, accessToken }),
-    setAccessToken: (accessToken) => set({ accessToken }),
 
     signup: async (data, navigate) => {
         try {
@@ -30,7 +26,6 @@ export const userAuthStore = create((set) => ({
             if (res.data?.status === 200) {
                 set({
                     user: res.data?.data,
-                    accessToken: res.data?.token,
                     isUserAuthenticated: true
                 })
                 toast.success(res.data?.message || "Login successfull")
@@ -46,11 +41,8 @@ export const userAuthStore = create((set) => ({
         try {
             const res = await axiosInstance.get("/auth/check")
             console.log(res)
-            set({
-                isUserAuthenticated: true
-            })
         } catch (error) {
-
+            console.log(error)
         }
     },
 
@@ -69,7 +61,6 @@ export const userAuthStore = create((set) => ({
             if (res.data?.status === 200) {
                 set({
                     user: null,
-                    accessToken: null,
                     isUserAuthenticated: false
                 })
                 toast.success(res.data?.message || "Successfully logged out")
