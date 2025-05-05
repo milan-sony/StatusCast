@@ -11,6 +11,20 @@ export const userAuthStore = create((set) => ({
     setAuth: (user, accessToken) => set({ user, accessToken }),
     setAccessToken: (accessToken) => set({ accessToken }),
 
+    checkAuth: async () => {
+        try {
+            const res = await axiosInstance.get("/auth/check")
+            if (res.data?.status === 200) {
+                set({
+                    user: res.data?.user,
+                    isUserAuthenticated: true
+                })
+            }
+        } catch (error) {
+            console.error("Error authenticating the user: ", error)
+        }
+    },
+
     signup: async (data, navigate) => {
         try {
             const res = await axiosInstance.post("/auth/signup", data)
@@ -42,18 +56,6 @@ export const userAuthStore = create((set) => ({
         }
     },
 
-    checkAuth: async () => {
-        try {
-            const res = await axiosInstance.get("/auth/check")
-            console.log(res)
-            set({
-                isUserAuthenticated: true
-            })
-        } catch (error) {
-
-        }
-    },
-
     profile: async () => {
         try {
             const res = await axiosInstance.post("/auth/profile")
@@ -75,7 +77,6 @@ export const userAuthStore = create((set) => ({
                 toast.success(res.data?.message || "Successfully logged out")
                 navigate("/login")
             }
-
         } catch (error) {
             console.error("Error logging out the user, ", error.response?.data?.message || "Error logging out the user")
         }
