@@ -1,28 +1,27 @@
-// import { useEffect } from "react";
+import { useEffect } from "react";
 import { userAuthStore } from "../store/authStore";
-import { Navigate } from "react-router";
+import { useNavigate } from "react-router";
+import { Loader } from "lucide-react";
 
 const ProtectedRoute = ({ children }) => {
-    const accessToken = userAuthStore(state => state.accessToken)
-    console.log("Protected route accessToken, ", accessToken)
-    return accessToken ? children : <Navigate to="/login" />
+    const { isUserAuthenticated, isLoading } = userAuthStore()
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (!isLoading && !isUserAuthenticated) {
+            navigate("/login")
+        }
+    }, [isUserAuthenticated, isLoading, navigate])
+
+    if (isLoading) {
+        return (
+            <div className='flex items-center justify-center h-screen'>
+                <Loader className='size-10 animate-spin' />
+            </div>
+        )
+    }
+
+    return children
 }
 
 export default ProtectedRoute
-
-// const ProtectedRoute = ({ children }) => {
-
-//     const { isUserAuthenticated } = userAuthStore()
-
-//     console.log("isUserAuthenticated in protected", isUserAuthenticated)
-
-//     const navigate = useNavigate()
-
-//     useEffect(() => {
-//         if (!isUserAuthenticated) navigate("/login")
-//     }, [])
-
-//     return children
-// }
-
-// export default ProtectedRoute
