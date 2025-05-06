@@ -6,21 +6,21 @@ import axiosInstance from './lib/Axios'
 
 function App() {
 
-  const { setUser, setAccessToken } = userAuthStore()
+  const { setAccessToken, setUserAuthenticate, setLoading } = userAuthStore()
 
   useEffect(() => {
     const checkRefreshToken = async () => {
       try {
-        const res = await axiosInstance.post("/auth/refresh", null, { withCredentials: true })
+        const res = await axiosInstance.get("/auth/refresh", null, { withCredentials: true })
         setAccessToken(res.data?.accessToken)
-        const checkProfile = await axiosInstance.post("/api/check", {
-          headers: { Authorization: `Bearer ${res.data?.accessToken}` }
-        })
-        setUser(checkProfile.data.user)
+        setUserAuthenticate(true)
       } catch (error) {
-        console.error("Not authenticated", error)
+        console.error("Not authenticated", error.message)
+      } finally {
+        setLoading(false)
       }
     }
+
     checkRefreshToken()
   }, [])
 
