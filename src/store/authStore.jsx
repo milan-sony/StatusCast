@@ -7,24 +7,12 @@ export const userAuthStore = create((set) => ({
     user: null,
     accessToken: null,
     isUserAuthenticated: false,
+    isLoading: true,
 
     setUser: (user) => set({ user }),
-
     setAccessToken: (accessToken) => set({ accessToken }),
-
-    checkAuth: async () => {
-        try {
-            const res = await axiosInstance.get("/auth/check")
-            if (res.data?.status === 200) {
-                set({
-                    user: res.data?.user,
-                    isUserAuthenticated: true
-                })
-            }
-        } catch (error) {
-            console.error("Error authenticating the user: ", error)
-        }
-    },
+    setUserAuthenticate: (isUserAuthenticated) => set({ isUserAuthenticated }),
+    setLoading: (isLoading) => set({ isLoading }),
 
     signup: async (data, navigate) => {
         try {
@@ -52,7 +40,7 @@ export const userAuthStore = create((set) => ({
                 navigate("/home")
             }
         } catch (error) {
-            console.error("Error logging up the user, ", error)
+            console.error("Error logging up the user, ", error.message)
             toast.error(error.response?.data.message || "Invalid credentials")
         }
     },
@@ -66,20 +54,22 @@ export const userAuthStore = create((set) => ({
         }
     },
 
-    logout: async (navigate) => {
+    logout: async () => {
         try {
-            const res = await axiosInstance.post("/auth/logout")
-            if (res.data?.status === 200) {
-                set({
-                    user: null,
-                    accessToken: null,
-                    isUserAuthenticated: false
-                })
-                toast.success(res.data?.message || "Successfully logged out")
-                navigate("/login")
-            }
+            console.log("logout called")
+            const res = await axiosInstance.get("/auth/logout")
+            console.log("Logout res", res)
+
+            set({
+                user: null,
+                accessToken: null,
+                isUserAuthenticated: false
+            })
+
+            toast.success(res.data?.message || "Successfully logged out")
+
         } catch (error) {
-            console.error("Error logging out the user, ", error.response?.data?.message || "Error logging out the user")
+            console.error("Error logging out the user, ", error)
         }
     }
 }))
