@@ -74,6 +74,13 @@ export const userAuthStore = create((set) => ({
         try {
             const res = await axiosInstance.post("/auth/profile")
             console.log("Profile res", res)
+            if (res.data?.status === 200) {
+                set({
+                    user: res.data?.data,
+                    accessToken: res.data?.token,
+                    isUserAuthenticated: true
+                })
+            }
         } catch (error) {
             console.error(error)
         }

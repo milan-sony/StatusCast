@@ -27,9 +27,8 @@ function Navbar() {
                             </svg>
                         </div>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow">
-                            <li><Link to="/"><Home size={15} />Homee</Link></li>
+                            <li><Link to="/"><Home size={15} />Home</Link></li>
                             <li><Link to="/portfolio"><Info size={15} />About</Link></li>
-                            <li><Link to="/about"></Link></li>
                         </ul>
                     </div>
                     <div className="flex-1">
