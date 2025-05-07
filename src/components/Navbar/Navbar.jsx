@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import useTheme from '../../hooks/useTheme'
-import { MoonIcon, SunIcon } from 'lucide-react'
+import { Home, Info, LogOut, MoonIcon, SunIcon, User } from 'lucide-react'
 import { userAuthStore } from '../../store/authStore'
 import { useNavigate } from 'react-router'
 
@@ -27,9 +27,9 @@ function Navbar() {
                             </svg>
                         </div>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow">
-                            <li><Link to="/">Homepage</Link></li>
-                            <li><Link to="/portfolio">Portfolio</Link></li>
-                            <li><Link to="/about">About</Link></li>
+                            <li><Link to="/"><Home size={15} />Homee</Link></li>
+                            <li><Link to="/portfolio"><Info size={15} />About</Link></li>
+                            <li><Link to="/about"></Link></li>
                         </ul>
                     </div>
                     <div className="flex-1">
@@ -46,8 +46,8 @@ function Navbar() {
                                 <details>
                                     <summary>Settings</summary>
                                     <ul className="bg-base-100 rounded-t-none p-2">
-                                        <li><Link to="/link1">Profile</Link></li>
-                                        <li><button onClick={handleLogout}>Logout</button></li>
+                                        <li><Link to="/link1"><User size={15} />Profile</Link></li>
+                                        <li><button onClick={handleLogout}><LogOut size={15} />Logout</button></li>
                                     </ul>
                                 </details>
                             </li>
