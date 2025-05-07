@@ -3,10 +3,14 @@ import Navbar from '../../components/Navbar/Navbar'
 import { Link, useNavigate } from 'react-router'
 import toast from 'react-hot-toast'
 import { userAuthStore } from '../../store/authStore'
+import { Eye, EyeOff } from 'lucide-react'
 
 function LoginPage() {
 
-    const { login } = userAuthStore()
+    const { login, isLoggingIn } = userAuthStore()
+
+    // Toggle eye icon
+    const [showPassword, setShowPassword] = useState(false)
 
     const [formData, setFormData] = useState({
         email: "",
@@ -65,9 +69,27 @@ function LoginPage() {
                                     <label className="label font-[roboto]"><span className='text-red-500'>*</span>Email</label>
                                     <input type="email" className="input" placeholder="Email" name='email' value={formData.email} onChange={handleChange} />
                                     <label className="label font-[roboto]"><span className='text-red-500'>*</span>Password</label>
-                                    <input type="password" className="input" placeholder="Password" name='password' value={formData.password} onChange={handleChange} />
+                                    <label className="input">
+                                        <input type={showPassword ? "text" : "password"} placeholder="Password" name='password' value={formData.password} onChange={handleChange} />
+                                        <span className="cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
+                                            {/* toggle eye icon */}
+                                            {showPassword ? (
+                                                <Eye className='size-5' />
+                                            ) : (
+                                                <EyeOff className='size-5' />
+                                            )}
+                                        </span>
+                                    </label>
                                     <div><a className="link link-hover font-[roboto]">Forgot password?</a></div>
-                                    <button className="btn btn-primary btn-sm md:btn-md font-[roboto]" onClick={handleSubmit}>Login</button>
+                                    <button className="btn btn-primary btn-sm md:btn-md font-[roboto]" onClick={handleSubmit}>
+                                        {
+                                            isLoggingIn ? (
+                                                <span className='animate-pulse font-[roboto]'>Logging In</span>
+                                            ) : (
+                                                "Login"
+                                            )
+                                        }
+                                    </button>
                                     <p className='mt-4 font-[roboto]'>
                                         Don't have an account? <Link to={"/signup"} className='link font-[roboto]'>Signup</Link>
                                     </p>
