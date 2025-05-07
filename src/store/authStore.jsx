@@ -96,5 +96,22 @@ export const userAuthStore = create((set) => ({
         } catch (error) {
             console.error("Error logging out the user, ", error)
         }
+    },
+
+    axiosLogout: async () => {
+        try {
+            console.log("Axios logout called")
+            const res = await axiosInstance.get("/auth/logout")
+            console.log("Axios logout res", res)
+
+            set({
+                user: null,
+                accessToken: null,
+                isUserAuthenticated: false
+            })
+
+        } catch (error) {
+            console.error("Error logging out the user, ", error)
+        }
     }
 }))
