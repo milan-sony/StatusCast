@@ -78,7 +78,6 @@ function SignupPage() {
                                     <label className="label font-[roboto]"><span className='text-red-500'>*</span>Email</label>
                                     <input type="email" className="input" placeholder="Email" name='email' value={formData.email} onChange={handleChange} />
                                     <label className="label font-[roboto]"><span className='text-red-500'>*</span>Password</label>
-                                    {/* <input type="password" className="input" placeholder="Password" name='password' value={formData.password} onChange={handleChange} /> */}
                                     <label className="input">
                                         <input type={showPassword ? "text" : "password"} placeholder="Password" name='password' value={formData.password} onChange={handleChange} />
                                         <span className="cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
@@ -91,7 +90,15 @@ function SignupPage() {
                                         </span>
                                     </label>
                                     <div><a className="link link-hover font-[roboto]">Forgot password?</a></div>
-                                    <button className="btn btn-primary btn-sm md:btn-md font-[roboto]" onClick={handleSubmit}>Signup</button>
+                                    <button className="btn btn-primary btn-sm md:btn-md font-[roboto]" onClick={handleSubmit}>
+                                        {
+                                            isSigningUp ? (
+                                                <span className='animate-pulse font-[roboto]'>Signing Up</span>
+                                            ) : (
+                                                "Signup"
+                                            )
+                                        }
+                                    </button>
                                     <p className='mt-4 font-[roboto]'>
                                         Already have an account? <Link to={"/login"} className='link font-[roboto]'>Login</Link>
                                     </p>
