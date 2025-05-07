@@ -38,7 +38,7 @@ axiosInstance.interceptors.response.use(
             } catch (error) {
                 console.log("Logging out from axios due to refresh token failure");
                 // Handle navigation outside of the interceptor
-                userAuthStore.getState().logout(); // Log the user out
+                userAuthStore.getState().axiosLogout(); // Log the user out
             }
         }
         return Promise.reject(err); // Propagate the error normally
