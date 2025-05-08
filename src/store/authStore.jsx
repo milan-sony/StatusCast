@@ -11,7 +11,6 @@ export const userAuthStore = create((set) => ({
     isSigningUp: false,
     isLoggingIn: false,
 
-    setUser: (user) => set({ user }),
     setAccessToken: (accessToken) => set({ accessToken }),
     setUserAuthenticate: (isUserAuthenticated) => set({ isUserAuthenticated }),
     setLoading: (isLoading) => set({ isLoading }),
@@ -71,14 +70,13 @@ export const userAuthStore = create((set) => ({
     },
 
     profile: async () => {
+        console.log("profile called")
         try {
             const res = await axiosInstance.post("/auth/profile")
             console.log("Profile res", res)
             if (res.data?.status === 200) {
                 set({
-                    user: res.data?.data,
-                    accessToken: res.data?.token,
-                    isUserAuthenticated: true
+                    user: res.data?.user,
                 })
             }
         } catch (error) {

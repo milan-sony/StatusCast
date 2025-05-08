@@ -6,6 +6,8 @@ function HomePage() {
 
     const { profile, user } = userAuthStore()
 
+    console.log("user:, ", user)
+
     useEffect(() => {
         profile()
     }, [])
@@ -15,7 +17,7 @@ function HomePage() {
             <div className="w-full h-screen overflow-hidden bg-base-200">
                 <Navbar />
                 <div className='h-screen bg-base-100'>
-                    <h1>Hello {user.firstName}</h1>
+                <h1>Hello {user?.firstName || "Guest"}</h1>
                 </div>
             </div>
         </>
