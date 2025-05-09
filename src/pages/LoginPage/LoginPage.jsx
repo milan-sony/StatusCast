@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Navbar from '../../components/Navbar/Navbar'
 import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { userAuthStore } from '../../store/authStore'
@@ -54,7 +53,6 @@ function LoginPage() {
     return (
         <>
             <div className="w-full h-screen overflow-hidden bg-base-200 flex flex-col">
-                <Navbar />
                 <div className="hero h-screen">
                     <div className="hero-content flex-col lg:flex-row-reverse w-full">
                         <div className="text-center lg:text-left">
