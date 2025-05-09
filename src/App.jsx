@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast'
 import { userAuthStore } from './store/authStore'
 import axiosInstance from './lib/Axios'
 import { Loader } from 'lucide-react'
+import Navbar from './components/Navbar/Navbar'
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
 
   return (
     <div>
+      <Navbar />
       <Router />
       <Toaster />
     </div>

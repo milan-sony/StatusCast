@@ -1,15 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Navbar from '../../components/Navbar/Navbar'
 
 function IndexPage() {
 
     return (
-        <>
             <div className="w-full h-screen overflow-hidden bg-base-200 flex flex-col">
-
-                <Navbar />
-
                 {/* Main Content */}
                 <div className="flex-grow flex justify-center items-center">
                     <div className="flex flex-col md:flex-row items-center gap-8 max-w-4xl px-4">
@@ -40,8 +35,6 @@ function IndexPage() {
                 </footer>
 
             </div>
-
-        </>
     )
 }
 
