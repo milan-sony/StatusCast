@@ -87,7 +87,7 @@ function SignupPage() {
                                     </span>
                                 </label>
                                 <div><a className="link link-hover font-[roboto]">Forgot password?</a></div>
-                                <button className="btn btn-primary btn-sm md:btn-md font-[roboto]" onClick={handleSubmit}>
+                                <button className="btn btn-primary btn-sm md:btn-md font-[roboto]" onClick={handleSubmit} disabled={isSigningUp}>
                                     {
                                         isSigningUp ? (
                                             <span className='animate-pulse font-[roboto]'>Signing Up</span>
