@@ -15,7 +15,7 @@ function HomePage() {
     return (
         <>
             <div className="w-full h-screen overflow-hidden bg-base-200">
-                <div className='h-screen bg-base-100'>
+                <div className='h-screen bg-base-100 pt-[120px]'>
                     <h1>Hello {user?.firstName}</h1>
                 </div>
             </div>
