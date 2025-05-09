@@ -1,25 +1,38 @@
-import React from 'react'
-import useTheme from '../../hooks/useTheme'
-import { Home, Info, LogOut, MoonIcon, SunIcon, User } from 'lucide-react'
-import { userAuthStore } from '../../store/authStore'
-import { useNavigate, useLocation, Link } from 'react-router-dom'
+import React from 'react';
+import useTheme from '../../hooks/useTheme';
+import { Home, Info, LogOut, MoonIcon, SunIcon, User } from 'lucide-react';
+import { userAuthStore } from '../../store/authStore';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 function Navbar() {
-    const { theme, toggleTheme } = useTheme()
-
-    const { logout } = userAuthStore()
-
-    const navigate = useNavigate()
+    const { theme, toggleTheme } = useTheme();
+    const { logout } = userAuthStore();
+    const navigate = useNavigate();
     const location = useLocation();
     const currentPage = location.pathname;
 
     const handleLogout = () => {
-        logout(navigate)
-    }
+        logout(navigate);
+    };
+
+    const isAuthPage = ["/", "/signup", "/login"].includes(currentPage);
 
     return (
         <div className="navbar bg-base-200 shadow-sm fixed">
-            {currentPage === "/home" ? (
+            {isAuthPage ? (
+                <>
+                    <div className="flex-1">
+                        <Link to="/" className="btn btn-ghost text-xl">StatusCast</Link>
+                    </div>
+                    <div className="flex-none">
+                        <label className="swap swap-rotate mr-4">
+                            <input type="checkbox" onChange={toggleTheme} checked={theme === 'dark'} />
+                            <SunIcon className='size-5 swap-on' />
+                            <MoonIcon className='size-5 swap-off' />
+                        </label>
+                    </div>
+                </>
+            ) : (
                 <>
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
@@ -54,22 +67,9 @@ function Navbar() {
                         </ul>
                     </div>
                 </>
-            ) : (
-                <>
-                    <div className="flex-1">
-                        <Link to="/" className="btn btn-ghost text-xl">StatusCast</Link>
-                    </div>
-                    <div className="flex-none">
-                        <label className="swap swap-rotate mr-4">
-                            <input type="checkbox" onChange={toggleTheme} checked={theme === 'dark'} />
-                            <SunIcon className='size-5 swap-on' />
-                            <MoonIcon className='size-5 swap-off' />
-                        </label>
-                    </div>
-                </>
             )}
         </div>
-    )
+    );
 }
 
-export default Navbar
+export default Navbar;
