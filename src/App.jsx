@@ -3,12 +3,13 @@ import Router from './router/Router'
 import { Toaster } from 'react-hot-toast'
 import { userAuthStore } from './store/authStore'
 import axiosInstance from './lib/Axios'
-import { Loader } from 'lucide-react'
 import Navbar from './components/Navbar/Navbar'
+import PageLoader from './components/Loader/PageLoader'
 
 function App() {
 
-  const { setAccessToken, setUserAuthenticate, setLoading, isLoading } = userAuthStore()
+  const { setAccessToken, setUserAuthenticate, setLoading } = userAuthStore()
+  const loadingDelay = 500; // Delay in milliseconds
 
   useEffect(() => {
     const checkRefreshToken = async () => {
@@ -26,16 +27,11 @@ function App() {
     checkRefreshToken()
   }, [setAccessToken, setUserAuthenticate, setLoading])
 
-  if (isLoading) {
-    return (
-      <div className='flex items-center justify-center h-screen'>
-        <Loader className='size-10 animate-spin' />
-      </div>
-    )
-  }
+
 
   return (
     <div>
+      <PageLoader delay={loadingDelay} /> {/* Pass the delay to the Loader */}
       <Navbar />
       <Router />
       <Toaster />

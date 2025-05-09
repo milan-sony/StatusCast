@@ -1,25 +1,16 @@
 import { useEffect } from "react";
 import { userAuthStore } from "../store/authStore";
-import { useNavigate } from "react-router-dom";
-import { Loader } from "lucide-react";
+import { useNavigate } from "react-router";
 
 const ProtectedRoute = ({ children }) => {
-    const { isUserAuthenticated, isLoading } = userAuthStore()
+    const { isUserAuthenticated } = userAuthStore()
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (!isLoading && !isUserAuthenticated) {
+        if (!isUserAuthenticated) {
             navigate("/login")
         }
-    }, [isUserAuthenticated, isLoading, navigate])
-
-    if (isLoading) {
-        return (
-            <div className='flex items-center justify-center h-screen'>
-                <Loader className='size-10 animate-spin' />
-            </div>
-        )
-    }
+    }, [isUserAuthenticated, navigate])
 
     return children
 }
