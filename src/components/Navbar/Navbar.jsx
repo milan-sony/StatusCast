@@ -7,7 +7,7 @@ import { useNavigate, useLocation, Link } from 'react-router-dom'
 function Navbar() {
     const { theme, toggleTheme } = useTheme()
 
-    const { isUserAuthenticated, logout } = userAuthStore()
+    const { logout } = userAuthStore()
 
     const navigate = useNavigate()
     const location = useLocation();
