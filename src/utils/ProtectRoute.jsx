@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { userAuthStore } from "../store/authStore";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { Loader } from "lucide-react";
 
 const ProtectedRoute = ({ children }) => {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Navbar from '../../components/Navbar/Navbar'
-import { Link, useNavigate } from 'react-router'
+import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { userAuthStore } from '../../store/authStore'
 import { Eye, EyeOff } from 'lucide-react'
