@@ -18,7 +18,7 @@ function Navbar() {
     }
 
     return (
-        <div className="navbar bg-base-200 shadow-sm">
+        <div className="navbar bg-base-200 shadow-sm fixed">
             {currentPage === "/home" ? (
                 <>
                     <div className="dropdown">
