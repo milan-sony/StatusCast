@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Router from './router/Router'
 import { Toaster } from 'react-hot-toast'
 import { userAuthStore } from './store/authStore'
@@ -7,31 +7,45 @@ import Navbar from './components/Navbar/Navbar'
 import PageLoader from './components/Loader/PageLoader'
 
 function App() {
-
-  const { setAccessToken, setUserAuthenticate, setLoading } = userAuthStore()
-  const loadingDelay = 500; // Delay in milliseconds
+  const { setAccessToken, setUserAuthenticate, setLoading, isLoading } = userAuthStore()
+  const [showLoader, setShowLoader] = useState(false) // State to control loader visibility
+  const loaderDelay = 1000 // Delay in milliseconds
 
   useEffect(() => {
     const checkRefreshToken = async () => {
+      setLoading(true) // Start loading
+      setShowLoader(true) // Show loader immediately
       try {
-        const res = await axiosInstance.get("/auth/refresh", null, { withCredentials: true })
+        const res = await axiosInstance.get("/auth/refresh", { withCredentials: true })
         setAccessToken(res.data?.accessToken)
         setUserAuthenticate(true)
       } catch (error) {
         console.error("Not authenticated", error.message)
       } finally {
-        setLoading(false)
+        setLoading(false) // End loading
+        // Set a timeout to hide the loader after the delay
+        setTimeout(() => {
+          setShowLoader(false)
+        }, loaderDelay)
       }
     }
-    setLoading(true) // Set loading to true before checking the token
+
     checkRefreshToken()
+
+    // Cleanup function to clear timeout if the component unmounts
+    return () => {
+      setShowLoader(false)
+    }
   }, [setAccessToken, setUserAuthenticate, setLoading])
 
+  console.log("isLoading:", isLoading) // Debugging log
 
+  if (showLoader || isLoading) { // Show loader if either condition is true
+    return <PageLoader />
+  }
 
   return (
     <div>
-      <PageLoader delay={loadingDelay} /> {/* Pass the delay to the Loader */}
       <Navbar />
       <Router />
       <Toaster />
