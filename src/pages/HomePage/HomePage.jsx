@@ -12,7 +12,7 @@ function HomePage() {
 
     return (
         <>
-            <div className="w-full h-screen overflow-hidden bg-base-200 ">
+            <div className="w-full h-screen overflow-hidden">
                 <div className='h-screen pt-[120px] pl-10 pr-10'>
                     <div className='flex justify-between items-center'>
                         <div>
