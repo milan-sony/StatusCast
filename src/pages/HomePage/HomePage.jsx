@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import Navbar from '../../components/Navbar/Navbar'
 import { userAuthStore } from '../../store/authStore'
+import { Smile } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 function HomePage() {
 
@@ -17,20 +19,7 @@ function HomePage() {
                             <h1 className='text-4xl font-bold font-[poppins]'>Hello, {user?.firstName} {user.lastName} <span className='badge badge-soft badge-success'>Active</span></h1>
                         </div>
 
-                        <button className="btn btn-primary" onClick={() => document.getElementById('my_modal_5').showModal()} >Set Status</button>
-                        <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-                            <div className="modal-box">
-                                <h3 className="font-bold text-lg">Hello!</h3>
-                                <p className="py-4">Press ESC key or click the button below to close</p>
-                                <div className="modal-action">
-                                    <form method="dialog">
-                                        {/* if there is a button in form, it will close the modal */}
-                                        <button className="btn">Close</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </dialog>
-
+                        <Link to={"/set-status"} className='btn btn-primary font-[roboto]'>Set Status</Link>
 
                     </div>
                     {/* Current status */}
