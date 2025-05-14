@@ -4,13 +4,9 @@ import { userAuthStore } from '../../store/authStore'
 
 function HomePage() {
 
-    const { profile, user } = userAuthStore()
+    const { user } = userAuthStore()
 
     console.log("user:, ", user)
-
-    useEffect(() => {
-        profile()
-    }, [])
 
     return (
         <>
