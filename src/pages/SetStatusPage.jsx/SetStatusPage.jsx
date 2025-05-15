@@ -1,6 +1,7 @@
 import { Smile } from 'lucide-react'
 import React, { useState } from 'react'
 import EmojiPicker from "emoji-picker-react"
+import toast from 'react-hot-toast'
 
 function SetStatusPage() {
     const [isPickerVisible, setPickerVisible] = useState(false)
@@ -21,10 +22,34 @@ function SetStatusPage() {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
+    const validateForm = () => {
+        const { status, startTime, endTime } = formData
+
+        if (!status) {
+            return toast.error("Status is required")
+        }
+        if (!startTime) {
+            return toast.error("Start time is required")
+        }
+        if (!endTime) {
+            return toast.error("End time is required")
+        }
+
+        if (!chosenEmoji) {
+            return toast.error("Please set your mood")
+        }
+
+        return true
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log("formData", formData)
-        console.log("chosenEmoji", chosenEmoji)
+        const isFormValidate = validateForm()
+
+        if (isFormValidate === true) {
+            console.log("formData", formData)
+            console.log("chosenEmoji", chosenEmoji)
+        }
     }
 
     const clearStatus = () => {
