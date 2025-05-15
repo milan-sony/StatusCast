@@ -5,21 +5,36 @@ import EmojiPicker from "emoji-picker-react"
 function SetStatusPage() {
     const [isPickerVisible, setPickerVisible] = useState(false)
     const [chosenEmoji, setChosenEmoji] = useState(null)
-    const [status, setStatus] = useState('')
-    const [startTime, setStartTime] = useState('')
-    const [endTime, setEndTime] = useState('')
 
     const onEmojiClick = (event, emojiObject) => {
         setChosenEmoji(emojiObject)
         setPickerVisible(false)
     }
 
-    const clearStatus = () => {
-        setChosenEmoji(null)
-        setStatus('')
-        setStartTime('')
-        setEndTime('')
+    const [formData, setFormData] = useState({
+        status: "",
+        startTime: "",
+        endTime: ""
+    })
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value })
     }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log("formData", formData)
+        console.log("chosenEmoji", chosenEmoji)
+    }
+
+    const clearStatus = () => {
+        setFormData({
+            status: "",
+            startTime: "",
+            endTime: ""
+        });
+        setChosenEmoji(null);
+    };
 
     return (
         <>
@@ -65,8 +80,9 @@ function SetStatusPage() {
                                         type="text"
                                         className="input sm:w-sm"
                                         placeholder="What's your status?"
-                                        value={status}
-                                        onChange={(e) => setStatus(e.target.value)}
+                                        name='status'
+                                        value={formData.status}
+                                        onChange={handleChange}
                                     />
                                 </fieldset>
                             </div>
@@ -77,8 +93,9 @@ function SetStatusPage() {
                                     <input
                                         type="time"
                                         className="input sm:w-sm"
-                                        value={startTime}
-                                        onChange={(e) => setStartTime(e.target.value)}
+                                        name='startTime'
+                                        value={formData.startTime}
+                                        onChange={handleChange}
                                     />
                                 </fieldset>
                             </div>
@@ -89,15 +106,16 @@ function SetStatusPage() {
                                     <input
                                         type="time"
                                         className="input sm:w-sm"
-                                        value={endTime}
-                                        onChange={(e) => setEndTime(e.target.value)}
+                                        name='endTime'
+                                        value={formData.endTime}
+                                        onChange={handleChange}
                                     />
                                 </fieldset>
                             </div>
 
                             <div className='flex justify-between'>
                                 <div className='mt-5'>
-                                    <button className="btn btn-primary">Set Status</button>
+                                    <button className="btn btn-primary" onClick={handleSubmit}>Set Status</button>
                                 </div>
                                 <div className='mt-5'>
                                     <button className="btn btn-soft btn-primary" onClick={clearStatus}>Clear Status</button>
