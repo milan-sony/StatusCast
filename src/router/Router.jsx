@@ -7,8 +7,11 @@ import SignupPage from '../pages/SignupPage/SignupPage';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import ProtectedRoute from '../utils/ProtectRoute';
 import SetStatusPage from '../pages/SetStatusPage.jsx/SetStatusPage';
+import { userAuthStore } from '../store/authStore';
 
 function Router() {
+    const {isUserAuthenticated} = userAuthStore()
+    console.log("router isUserAuthenticated", isUserAuthenticated)
     return (
         <Routes>
             <Route path='/' element={<IndexPage />} />
