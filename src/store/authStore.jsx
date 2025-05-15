@@ -85,7 +85,7 @@ export const userAuthStore = create((set) => ({
     //     }
     // },
 
-    logout: async () => {
+    logout: async (navigate) => {
         try {
             console.log("logout called")
             const res = await axiosInstance.get("/auth/logout")
@@ -98,6 +98,7 @@ export const userAuthStore = create((set) => ({
             })
 
             toast.success(res.data?.message || "Successfully logged out")
+            navigate("/")
 
         } catch (error) {
             console.error("Error logging out the user, ", error)
