@@ -41,12 +41,12 @@ function Navbar() {
                             </svg>
                         </div>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow">
-                            <li><Link to="/"><Home size={15} />Home</Link></li>
-                            <li><Link to="/portfolio"><Info size={15} />About</Link></li>
+                            <li><Link to="/home"><Home size={15} />Home</Link></li>
+                            <li><Link to="/home"><Info size={15} />About</Link></li>
                         </ul>
                     </div>
                     <div className="flex-1">
-                        <Link to="/" className="btn btn-ghost text-xl">StatusCast</Link>
+                        <Link to="/home" className="btn btn-ghost text-xl">StatusCast</Link>
                     </div>
                     <div className="flex-none">
                         <ul className="menu menu-horizontal px-1">
