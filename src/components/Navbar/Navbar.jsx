@@ -1,7 +1,7 @@
 import React from 'react';
 import useTheme from '../../hooks/useTheme';
 import { Home, Info, LogOut, MoonIcon, SunIcon, User } from 'lucide-react';
-import { userAuthStore } from '../../store/authStore';
+import { userAuthStore } from '../../store/userAuthStore';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 function Navbar() {

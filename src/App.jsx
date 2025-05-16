@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Router from './router/Router'
 import { Toaster } from 'react-hot-toast'
-import { userAuthStore } from './store/authStore'
+import { userAuthStore } from './store/userAuthStore'
 import axiosInstance from './lib/Axios'
 import Navbar from './components/Navbar/Navbar'
 import PageLoader from './components/Loader/PageLoader'

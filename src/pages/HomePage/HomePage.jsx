@@ -1,7 +1,4 @@
-import React, { useEffect } from 'react'
-import Navbar from '../../components/Navbar/Navbar'
-import { userAuthStore } from '../../store/authStore'
-import { Smile } from 'lucide-react'
+import { userAuthStore } from '../../store/userAuthStore'
 import { Link } from 'react-router-dom'
 
 function HomePage() {
