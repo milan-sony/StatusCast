@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { userAuthStore } from '../../store/userAuthStore'
 import { Link } from 'react-router-dom'
 import { userStatusStore } from '../../store/userStatusStore'
+import { Edit2, Trash2 } from 'lucide-react'
 
 function HomePage() {
 
@@ -33,12 +34,13 @@ function HomePage() {
                             userStatus ? (
                                 <ul className="list bg-base-100 rounded-box shadow-md w-md mt-5">
                                     <li className="list-row">
-                                        <div><img className="size-10 rounded-box" src={userStatus.emoji} /></div>
+                                        <div><img className="size-10" src={userStatus.emoji} /></div>
                                         <div>
-                                            <div>{userStatus ? (userStatus?.status) : "No Status"}</div>
-                                            <div className="text-xs capitalize font-semibold opacity-60">Start time: {userStatus.startTime} - End time: {userStatus.endTime}</div>
+                                            <div className='mb-2'>{userStatus ? (userStatus?.status) : "No Status"}</div>
+                                            <div className="text-xs font-semibold opacity-60">Start's from: {userStatus.startTime} - End's at: {userStatus.endTime}</div>
                                         </div>
-                                        <button className="btn btn-soft btn-info">Edit</button>
+                                        <button className="btn btn-sm btn-soft btn-info"><Edit2 size={20}/></button>
+                                        <button className="btn btn-sm btn-soft btn-error"><Trash2 size={20}/></button>
                                     </li>
                                 </ul>
 
