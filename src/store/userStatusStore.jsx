@@ -3,9 +3,9 @@ import { create } from 'zustand'
 import axiosInstance from "../lib/Axios"
 
 export const userStatusStore = create((set) => ({
-
     statusData: null,
     isStatusSet: false,
+    userStatus: null,
 
     setStatus: async (data, navigate) => {
         set({ isStatusSet: true })
@@ -26,6 +26,19 @@ export const userStatusStore = create((set) => ({
             toast.error(error.response?.data?.message)
         } finally {
             set({ isStatusSet: false })
+        }
+    },
+
+    getStatus: async (userId) => {
+        console.log("userId", userId)
+        try {
+            const res = await axiosInstance.get(`/status/get-status/${userId}`)
+            console.log("getStatus res, ", res)
+            set({
+                userStatus: res.data?.message
+            })
+        } catch (error) {
+            console.error("Error getting the user status: ", error)
         }
     }
 
