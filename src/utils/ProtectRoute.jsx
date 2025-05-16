@@ -1,12 +1,10 @@
 import { useEffect } from "react";
 import { userAuthStore } from "../store/authStore";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children }) => {
     const { isUserAuthenticated } = userAuthStore()
     const navigate = useNavigate()
-
-    console.log("protectecd route isUserAuthenticated", isUserAuthenticated)
 
     useEffect(() => {
         if (!isUserAuthenticated) {
