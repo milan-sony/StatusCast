@@ -4,6 +4,7 @@ import EmojiPicker from "emoji-picker-react"
 import toast from 'react-hot-toast'
 import { userStatusStore } from '../../store/userStatusStore'
 import { userAuthStore } from '../../store/userAuthStore'
+import { useNavigate } from 'react-router-dom'
 
 function SetStatusPage() {
 
@@ -48,6 +49,8 @@ function SetStatusPage() {
         return true
     }
 
+    const navigate = useNavigate()
+
     const handleSubmit = (e) => {
         e.preventDefault()
         const isFormValidate = validateForm()
@@ -56,13 +59,13 @@ function SetStatusPage() {
 
             const statusData = {
                 userId: user._id,
-                emoji: chosenEmoji,
+                emoji: chosenEmoji.target.src,
                 status: formData.status,
                 startTime: formData.startTime,
                 endTime: formData.endTime
             }
 
-            setStatus(statusData)
+            setStatus(statusData, navigate)
         }
     }
 
