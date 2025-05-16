@@ -52,18 +52,23 @@ function SetStatusPage() {
         }
     }
 
+    const handleEmoji = () => {
+        setPickerVisible(false)
+    }
+
     const clearStatus = () => {
         setFormData({
             status: "",
             startTime: "",
             endTime: ""
-        });
-        setChosenEmoji(null);
-    };
+        })
+        setChosenEmoji(null)
+        setPickerVisible(false)
+    }
 
     return (
         <>
-            <div className='w-full h-screen overflow-hidden'>
+            <div className='w-full h-dvh overflow-hidden'>
                 <div className='mt-20 pl-10 pr-10'>
                     <div className='flex flex-col justify-center items-center'>
                         <div className='p-10 rounded-md shadow-2xl'>
@@ -108,6 +113,7 @@ function SetStatusPage() {
                                         name='status'
                                         value={formData.status}
                                         onChange={handleChange}
+                                        onClick={handleEmoji}
                                     />
                                 </fieldset>
                             </div>
@@ -121,6 +127,7 @@ function SetStatusPage() {
                                         name='startTime'
                                         value={formData.startTime}
                                         onChange={handleChange}
+                                        onClick={handleEmoji}
                                     />
                                 </fieldset>
                             </div>
@@ -134,6 +141,7 @@ function SetStatusPage() {
                                         name='endTime'
                                         value={formData.endTime}
                                         onChange={handleChange}
+                                        onClick={handleEmoji}
                                     />
                                 </fieldset>
                             </div>
