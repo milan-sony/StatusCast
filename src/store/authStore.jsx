@@ -70,21 +70,6 @@ export const userAuthStore = create((set) => ({
         }
     },
 
-    // profile: async () => {
-    //     console.log("profile called")
-    //     try {
-    //         const res = await axiosInstance.post("/auth/profile")
-    //         console.log("Profile res", res)
-    //         if (res.data?.status === 200) {
-    //             set({
-    //                 user: res.data?.user,
-    //             })
-    //         }
-    //     } catch (error) {
-    //         console.error(error)
-    //     }
-    // },
-
     logout: async (navigate) => {
         try {
             console.log("logout called")
