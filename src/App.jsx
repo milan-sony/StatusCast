@@ -21,7 +21,7 @@ function App() {
         setUserAuthenticate(true)
 
         // Fetch user profile after refresh success
-        const profileRes = await axiosInstance.post("/auth/profile")
+        const profileRes = await axiosInstance.post("/user/profile")
         if (profileRes.data?.status === 200) {
           setUser(profileRes.data?.user)
         }
