@@ -2,8 +2,14 @@ import { Smile } from 'lucide-react'
 import React, { useState } from 'react'
 import EmojiPicker from "emoji-picker-react"
 import toast from 'react-hot-toast'
+import { userStatusStore } from '../../store/userStatusStore'
+import { userAuthStore } from '../../store/userAuthStore'
 
 function SetStatusPage() {
+
+    const { setStatus } = userStatusStore()
+    const { user } = userAuthStore()
+
     const [isPickerVisible, setPickerVisible] = useState(false)
     const [chosenEmoji, setChosenEmoji] = useState(null)
 
@@ -47,8 +53,16 @@ function SetStatusPage() {
         const isFormValidate = validateForm()
 
         if (isFormValidate === true) {
-            console.log("formData", formData)
-            console.log("chosenEmoji", chosenEmoji)
+
+            const statusData = {
+                userId: user._id,
+                emoji: chosenEmoji,
+                status: formData.status,
+                startTime: formData.startTime,
+                endTime: formData.endTime
+            }
+
+            setStatus(statusData)
         }
     }
 
