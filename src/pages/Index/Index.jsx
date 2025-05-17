@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function IndexPage() {
+function Index() {
 
     return (
             <div className="w-full h-screen overflow-hidden bg-base-200 flex flex-col">
@@ -38,4 +38,4 @@ function IndexPage() {
     )
 }
 
-export default IndexPage
+export default Index

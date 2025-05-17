@@ -4,7 +4,7 @@ import toast from 'react-hot-toast'
 import { userAuthStore } from '../../store/userAuthStore'
 import { Eye, EyeOff } from 'lucide-react'
 
-function LoginPage() {
+function Login() {
 
     const { login, isLoggingIn } = userAuthStore()
 
@@ -101,4 +101,4 @@ function LoginPage() {
     )
 }
 
-export default LoginPage
+export default Login

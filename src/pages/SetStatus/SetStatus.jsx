@@ -6,7 +6,7 @@ import { userStatusStore } from '../../store/userStatusStore'
 import { userAuthStore } from '../../store/userAuthStore'
 import { useNavigate } from 'react-router-dom'
 
-function SetStatusPage() {
+function SetStatus() {
 
     const { setStatus } = userStatusStore()
     const { user } = userAuthStore()
@@ -179,4 +179,4 @@ function SetStatusPage() {
     )
 }
 
-export default SetStatusPage
+export default SetStatus

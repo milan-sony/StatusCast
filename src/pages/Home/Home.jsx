@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { userStatusStore } from '../../store/userStatusStore'
 import { Edit2, Trash2 } from 'lucide-react'
 
-function HomePage() {
+function Home() {
 
     const { user } = userAuthStore()
     const { getStatus, userStatus } = userStatusStore()
@@ -24,19 +24,18 @@ function HomePage() {
                             <h1 className='text-xl sm:text-4xl font-bold font-[poppins] capitalize'>Hello, {user?.firstName} {user.lastName} <span className='badge badge-soft badge-success badge-xs'>Active</span></h1>
                         </div>
                         <div className='mt-3'>
-                            <Link to={"/find-profile"} className='btn btn-primary btn-sm md:btn-md font-[roboto] mr-2'>Find Profile</Link>
+                            <Link to={"/find-profie"} className='btn btn-primary btn-soft btn-sm md:btn-md font-[roboto] mr-2'>Find Profile</Link>
                             <Link to={"/set-status"} className='btn btn-primary btn-sm md:btn-md font-[roboto]  ml-2'>Set Status</Link>
                         </div>
                     </div>
 
                     {/* Current status */}
                     <div className='mt-10'>
-
-                        <h1 className='font-bold text-md mb-2 font-[roboto]'>Your current status</h1>
+                        <h1 className='font-bold text-md mb-2 font-[roboto]'>Your status</h1>
                         {
                             userStatus ? (
 
-                                <div className='flex flex-col justify-center items-center text-center p-4 bg-base-100 rounded-box sm:w-md sm:flex-row sm:justify-between sm:text-left sm:items-center'>
+                                <div className='flex flex-col justify-center items-center text-center p-4 bg-base-100 rounded-box sm:w-md sm:flex-row sm:justify-between sm:text-left sm:items-center shadow-md'>
                                     <div className='flex justify-center'>
                                         <img className="size-15 sm:size-10" src={userStatus.emoji} alt="emoji" />
                                     </div>
@@ -64,10 +63,12 @@ function HomePage() {
                             )
                         }
                     </div>
+
+                    {/* Others status  */}
                 </div>
             </div>
         </>
     )
 }
 
-export default HomePage
+export default Home

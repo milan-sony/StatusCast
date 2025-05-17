@@ -4,7 +4,7 @@ import toast from 'react-hot-toast'
 import { userAuthStore } from '../../store/userAuthStore'
 import { Eye, EyeOff } from 'lucide-react'
 
-function SignupPage() {
+function Signup() {
 
     // Toggle password
     const [showPassword, setShowPassword] = useState(false)
@@ -108,4 +108,4 @@ function SignupPage() {
     )
 }
 
-export default SignupPage
+export default Signup
