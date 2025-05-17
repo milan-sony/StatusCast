@@ -1,6 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 function SearchProfile() {
+
+  const [searchName, setSearchName] = useState({
+    searchName: ""
+  })
+
+  const handleChange = (e) => {
+
+    setSearchName({ ...searchName, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(searchName)
+  }
+
   return (
     <div className='w-full h-dvh'>
       <div className='pt-[100px] pl-10 pr-10'>
@@ -19,9 +34,9 @@ function SearchProfile() {
                 <path d="m21 21-4.3-4.3"></path>
               </g>
             </svg>
-            <input type="search" required placeholder="Search Name" />
+            <input type="search" required placeholder="Search Name" name='searchName' value={searchName.searchName} onChange={handleChange} />
           </label>
-          <button className="btn btn-primary">Search</button>
+          <button onClick={handleSubmit} className="btn btn-primary">Search</button>
         </div>
 
         <div className='mt-10'>
