@@ -21,7 +21,7 @@ function HomePage() {
                 <div className='h-screen pt-[120px] pl-10 pr-10'>
                     <div className='flex justify-between items-center'>
                         <div>
-                            <h1 className='text-xl sm:text-4xl font-bold font-[poppins]'>Hello, {user?.firstName} {user.lastName} <span className='badge badge-soft badge-success'>Active</span></h1>
+                            <h1 className='text-xl sm:text-4xl font-bold font-[poppins] capitalize'>Hello, {user?.firstName} {user.lastName} <span className='badge badge-soft badge-success'>Active</span></h1>
                         </div>
                         <Link to={"/set-status"} className='btn btn-primary font-[roboto]'>Set Status</Link>
                     </div>
