@@ -21,37 +21,43 @@ function HomePage() {
                 <div className='h-screen pt-[120px] pl-10 pr-10'>
                     <div className='flex justify-between items-center'>
                         <div>
-                            <h1 className='text-4xl font-bold font-[poppins]'>Hello, {user?.firstName} {user.lastName} <span className='badge badge-soft badge-success'>Active</span></h1>
+                            <h1 className='text-xl sm:text-4xl font-bold font-[poppins]'>Hello, {user?.firstName} {user.lastName} <span className='badge badge-soft badge-success'>Active</span></h1>
                         </div>
                         <Link to={"/set-status"} className='btn btn-primary font-[roboto]'>Set Status</Link>
                     </div>
 
                     {/* Current status */}
                     <div className='mt-20'>
-                        <h1 className='font-bold text-sm font-[roboto]'>Your current status</h1>
 
+                        <h1 className='font-bold text-md mb-2 font-[roboto]'>Your current status</h1>
                         {
                             userStatus ? (
-                                <ul className="list bg-base-100 rounded-box shadow-md w-md mt-5">
-                                    <li className="list-row">
-                                        <div><img className="size-10" src={userStatus.emoji} /></div>
-                                        <div>
-                                            <div className='mb-2'>{userStatus ? (userStatus?.status) : "No Status"}</div>
-                                            <div className="text-xs font-semibold opacity-60">Start's from: {userStatus.startTime} - End's at: {userStatus.endTime}</div>
+
+                                <div className='flex flex-col justify-center items-center text-center p-4 bg-base-100 rounded-box sm:w-md sm:flex-row sm:justify-between sm:text-left sm:items-center'>
+                                    <div className='flex justify-center'>
+                                        <img className="size-15 sm:size-10" src={userStatus.emoji} alt="emoji" />
+                                    </div>
+                                    <div className='mt-2'>
+                                        <h1 className='font-bold text-sm font-roboto'>{userStatus?.status}</h1>
+                                        <div className='flex flex-col sm:flex-row mt-2'>
+                                            <p className='font-medium text-xs font-roboto sm:mr-2'>Start's from: {userStatus.startTime}</p>
+                                            <p className='font-medium text-xs font-roboto sm:ml-2'>End's at: {userStatus.endTime}</p>
                                         </div>
-                                        <button className="btn btn-sm btn-soft btn-info"><Edit2 size={20}/></button>
-                                        <button className="btn btn-sm btn-soft btn-error"><Trash2 size={20}/></button>
-                                    </li>
-                                </ul>
+                                    </div>
+                                    <div className='mt-5'>
+                                        <button className="btn btn-sm btn-soft btn-info mr-2"><Edit2 size={15} /></button>
+                                        <button className="btn btn-sm btn-soft btn-error ml-2"><Trash2 size={15} /></button>
+                                    </div>
+                                </div>
 
                             ) : (
-                                <ul className="list bg-base-100 rounded-box shadow-md w-md mt-5">
-                                    <li className="list-row">
-                                        <div>
-                                            <div>You haven't set any status!</div>
-                                        </div>
-                                    </li>
-                                </ul>
+
+                                <div className='flex flex-col justify-center items-center text-center p-4 bg-base-100 rounded-box sm:w-md sm:flex-row sm:justify-between sm:text-left sm:items-center'>
+                                    <div className='flex justify-center'>
+                                        <p className='font-roboto text-sm'>You haven't set any status!</p>
+                                    </div>
+                                </div>
+
                             )
                         }
                     </div>
