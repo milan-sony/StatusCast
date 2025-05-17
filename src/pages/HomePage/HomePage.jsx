@@ -18,16 +18,19 @@ function HomePage() {
     return (
         <>
             <div className="w-full h-screen overflow-hidden">
-                <div className='h-screen pt-[120px] pl-10 pr-10'>
-                    <div className='flex justify-between items-center'>
+                <div className='h-screen pt-[100px] pl-10 pr-10'>
+                    <div className='flex flex-col justify-center items-center sm:flex-row sm:justify-between text-center'>
                         <div>
-                            <h1 className='text-xl sm:text-4xl font-bold font-[poppins] capitalize'>Hello, {user?.firstName} {user.lastName} <span className='badge badge-soft badge-success'>Active</span></h1>
+                            <h1 className='text-xl sm:text-4xl font-bold font-[poppins] capitalize'>Hello, {user?.firstName} {user.lastName} <span className='badge badge-soft badge-success badge-xs'>Active</span></h1>
                         </div>
-                        <Link to={"/set-status"} className='btn btn-primary font-[roboto]'>Set Status</Link>
+                        <div className='mt-3'>
+                            <Link to={"/find-profile"} className='btn btn-primary btn-sm md:btn-md font-[roboto] mr-2'>Find Profile</Link>
+                            <Link to={"/set-status"} className='btn btn-primary btn-sm md:btn-md font-[roboto]  ml-2'>Set Status</Link>
+                        </div>
                     </div>
 
                     {/* Current status */}
-                    <div className='mt-20'>
+                    <div className='mt-10'>
 
                         <h1 className='font-bold text-md mb-2 font-[roboto]'>Your current status</h1>
                         {
