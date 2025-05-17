@@ -20,7 +20,7 @@ function Router() {
             <Route path='/login' element={<Login />} />
             <Route path='/home' element={<ProtectedRoute><Home /></ProtectedRoute>} />
             <Route path='/set-status' element={<ProtectedRoute><SetStatus /></ProtectedRoute>} />
-            {/* <Route path='/search-profile' element={<ProtectedRoute><SearchProfile /></ProtectedRoute>} /> */}
+            <Route path='/search-profile' element={<ProtectedRoute><SearchProfile /></ProtectedRoute>} />
             <Route path='*' element={<PageNotFound />} />
         </Routes>
     )
