@@ -19,8 +19,10 @@ export const userStatusStore = create((set) => ({
                 })
                 toast.success(res.data?.message || "Status saved successfully")
                 navigate("/home")
+            } else {
+                console.log("set status res: ", res)
+                toast.error(res.data?.message || "You have already set one status")
             }
-            console.log("status res: ", res)
         } catch (error) {
             console.error("setStatus error", error)
             toast.error(error.response?.data?.message)

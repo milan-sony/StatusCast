@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { userAuthStore } from '../../store/userAuthStore'
-import { Eye, EyeOff } from 'lucide-react'
+import { Eye, EyeOff, Loader2 } from 'lucide-react'
 
 function Login() {
 
@@ -82,8 +82,7 @@ function Login() {
                                     <button className="btn btn-primary btn-sm md:btn-md font-[roboto]" onClick={handleSubmit} disabled={isLoggingIn}>
                                         {
                                             isLoggingIn ? (
-                                                <span className='animate-pulse font-[roboto]'>Logging In</span>
-                                            ) : (
+                                                <Loader2 className='animate-spin' />) : (
                                                 "Login"
                                             )
                                         }
