@@ -14,6 +14,9 @@ function SetStatus() {
     const [isPickerVisible, setPickerVisible] = useState(false)
     const [chosenEmoji, setChosenEmoji] = useState(null)
 
+    const [isCurrentTimeChecked, setIsCurrentTimeChecked] = useState(false)
+
+
     const onEmojiClick = (event, emojiObject) => {
         setChosenEmoji(emojiObject)
         setPickerVisible(false)
@@ -35,7 +38,7 @@ function SetStatus() {
         if (!startTime) return toast.error("Start time is required")
         if (!endTime) return toast.error("End time is required")
         if (!chosenEmoji) return toast.error("Please set your mood")
-        if(startTime === endTime) return toast.error("Start and end times must be different")
+        if (startTime === endTime) return toast.error("Start and end times must be different")
         return true
     }
 
@@ -102,6 +105,7 @@ function SetStatus() {
         })
         setChosenEmoji(null)
         setPickerVisible(false)
+        setIsCurrentTimeChecked(false)
     }
 
     return (
@@ -167,7 +171,15 @@ function SetStatus() {
                                     onClick={handleEmoji}
                                 />
                                 <label className="label mt-1">
-                                    <input type="checkbox" className="checkbox checkbox-xs" onClick={getCurrentTime} />
+                                    <input
+                                        type="checkbox"
+                                        className="checkbox checkbox-xs"
+                                        checked={isCurrentTimeChecked}
+                                        onChange={(e) => {
+                                            setIsCurrentTimeChecked(e.target.checked)
+                                            if (e.target.checked) getCurrentTime()
+                                        }}
+                                    />
                                     Current time
                                 </label>
                             </fieldset>
