@@ -7,13 +7,18 @@ import { Edit2, Trash2 } from 'lucide-react'
 function Home() {
 
     const { user } = userAuthStore()
-    const { getStatus, userStatus } = userStatusStore()
+    const { getStatus, userStatus, deleteStatus } = userStatusStore()
 
     useEffect(() => {
         getStatus(user._id)
     }, [])
 
-    console.log("user:, ", user)
+    console.log("user: ", user)
+
+    const statusDelete = () => {
+        console.log("statusDelete: ", user._id)
+        deleteStatus(user._id)
+    }
 
     return (
         <>
@@ -47,8 +52,7 @@ function Home() {
                                         </div>
                                     </div>
                                     <div className='mt-5'>
-                                        <button className="btn btn-sm btn-soft btn-info mr-2"><Edit2 size={15} /></button>
-                                        <button className="btn btn-sm btn-soft btn-error ml-2"><Trash2 size={15} /></button>
+                                        <button className="btn btn-sm btn-soft btn-error" onClick={statusDelete}><Trash2 size={15} /></button>
                                     </div>
                                 </div>
 
