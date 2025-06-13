@@ -3,12 +3,10 @@ import React, { useState } from 'react'
 import EmojiPicker from "emoji-picker-react"
 import toast from 'react-hot-toast'
 import { userStatusStore } from '../../store/userStatusStore'
-import { userAuthStore } from '../../store/userAuthStore'
 import { useNavigate } from 'react-router-dom'
 
 function SetStatus() {
     const { setStatus, isStatusSet } = userStatusStore()
-    const { user } = userAuthStore()
     const navigate = useNavigate()
 
     const [isPickerVisible, setPickerVisible] = useState(false)
@@ -81,7 +79,6 @@ function SetStatus() {
 
         if (isFormValid === true) {
             const statusData = {
-                userId: user._id,
                 emoji: chosenEmoji.target.src,
                 status: formData.status,
                 startTime: formatTime(formData.startTime),
@@ -109,8 +106,8 @@ function SetStatus() {
     }
 
     return (
-        <div className='w-full h-dvh overflow-hidden'>
-            <div className='mt-20 pl-10 pr-10'>
+        <div className='w-full h-screen'>
+            <div className='pl-10 pr-10 pt-[100px]'>
                 <div className='flex flex-col justify-center items-center'>
                     <div className='p-10 rounded-md shadow-2xl'>
                         <h1 className='text-2xl font-bold font-[poppins] mb-5'>Set Your Status</h1>

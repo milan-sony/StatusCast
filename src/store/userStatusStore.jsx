@@ -32,10 +32,9 @@ export const userStatusStore = create((set) => ({
         }
     },
 
-    getStatus: async (userId) => {
-        console.log("userId", userId)
+    getStatus: async () => {
         try {
-            const res = await axiosInstance.get(`/status/get-status/${userId}`)
+            const res = await axiosInstance.get("/status/get-status")
             console.log("getStatus res: ", res)
             set({
                 userStatus: res.data?.message
@@ -48,9 +47,9 @@ export const userStatusStore = create((set) => ({
         }
     },
 
-    deleteStatus: async (userId) => {
+    deleteStatus: async () => {
         try {
-            const res = await axiosInstance.delete(`/status/delete-status/${userId}`)
+            const res = await axiosInstance.delete("/status/delete-status")
             console.log("Del status res: ", res)
             set({
                 userStatus: null,

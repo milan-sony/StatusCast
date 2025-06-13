@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { userAuthStore } from '../../store/userAuthStore'
 import { Link } from 'react-router-dom'
 import { userStatusStore } from '../../store/userStatusStore'
-import { Edit2, Trash2 } from 'lucide-react'
+import { Trash2 } from 'lucide-react'
 
 function Home() {
 
@@ -10,15 +10,14 @@ function Home() {
     const { getStatus, userStatus, deleteStatus, getAllUsersStatus, allUserStatus } = userStatusStore()
 
     useEffect(() => {
-        getStatus(user._id)
+        getStatus()
         getAllUsersStatus()
     }, [])
 
     console.log("user: ", user)
 
     const statusDelete = () => {
-        console.log("statusDelete: ", user._id)
-        deleteStatus(user._id)
+        deleteStatus()
     }
 
     return (
@@ -46,7 +45,6 @@ function Home() {
                                         <img className="size-15 sm:size-10" src={userStatus.emoji} alt="emoji" />
                                     </div>
                                     <div className='mt-2'>
-                                        <h1 className='font-bold text-sm font-roboto'>{userStatus?.status}</h1>
                                         <h1 className='font-bold text-sm font-roboto'>{userStatus?.status}</h1>
                                         <div className='flex flex-col sm:flex-row mt-2'>
                                             <p className='font-medium text-xs font-roboto sm:mr-2'>Start's from: {userStatus.startTime}</p>
@@ -77,13 +75,13 @@ function Home() {
                             {
                                 allUserStatus.map((allUserStatus) => (
                                     <div className='flex flex-col justify-center items-center text-center p-4 bg-base-200 rounded-box 
-                                sm:justify-between sm:w-md sm:flex-row sm:text-left shadow-md'>
+                                sm:justify-between sm:w-md sm:flex-row sm:text-left shadow-md' key={allUserStatus._id}>
                                         <div className='flex justify-center'>
                                             <img className="size-15 sm:size-10" src={allUserStatus.emoji} alt="emoji" />
                                         </div>
                                         <div className='mt-2'>
                                             <h1 className='font-bold text-md font-roboto'>{allUserStatus?.userId?.firstName} {allUserStatus?.userId?.lastName}</h1>
-                                            <h1 className='font-bold text-sm font-roboto'>{allUserStatus?.status}</h1>
+                                            <h1 className='text-sm font-roboto'>{allUserStatus?.status}</h1>
                                             <div className='flex flex-col sm:flex-row mt-2'>
                                                 <p className='font-medium text-xs font-roboto sm:mr-2'>Start's from: {allUserStatus.startTime}</p>
                                                 <p className='font-medium text-xs font-roboto sm:ml-2'>End's at: {allUserStatus.endTime}</p>
@@ -94,7 +92,6 @@ function Home() {
                             }
                         </div>
                     </div>
-
                 </div>
             </div>
         </>
