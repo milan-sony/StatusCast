@@ -6,6 +6,7 @@ export const userStatusStore = create((set) => ({
     statusData: null,
     isStatusSet: false,
     userStatus: null,
+    allUserStatus: [],
 
     setStatus: async (data, navigate) => {
         set({ isStatusSet: true })
@@ -62,7 +63,19 @@ export const userStatusStore = create((set) => ({
             })
             console.error("Del status error: ", error)
             toast.error(error.response?.data?.message || "Something went wrong")
+        }
+    },
 
+    getAllUsersStatus: async () => {
+        try {
+            const res = await axiosInstance.get("status/get-all-status")
+            console.log("getAllUsersStatus res: ", res.data?.message)
+            set({
+                allUserStatus: res.data?.message
+            })
+        } catch (error) {
+            console.error("Del status error: ", error)
+            toast.error(error.response?.data?.message || "Something went wrong")
         }
     }
 

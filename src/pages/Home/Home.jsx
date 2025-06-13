@@ -7,10 +7,11 @@ import { Edit2, Trash2 } from 'lucide-react'
 function Home() {
 
     const { user } = userAuthStore()
-    const { getStatus, userStatus, deleteStatus } = userStatusStore()
+    const { getStatus, userStatus, deleteStatus, getAllUsersStatus, allUserStatus } = userStatusStore()
 
     useEffect(() => {
         getStatus(user._id)
+        getAllUsersStatus()
     }, [])
 
     console.log("user: ", user)
@@ -22,7 +23,7 @@ function Home() {
 
     return (
         <>
-            <div className="w-full h-screen overflow-hidden">
+            <div className="w-full h-screen">
                 <div className='pt-[100px] pl-10 pr-10'>
                     <div className='flex flex-col justify-center items-center sm:flex-row sm:justify-between text-center'>
                         <div>
@@ -40,11 +41,12 @@ function Home() {
                         {
                             userStatus ? (
 
-                                <div className='flex flex-col justify-center items-center text-center p-4 bg-base-100 rounded-box sm:w-md sm:flex-row sm:justify-between sm:text-left sm:items-center shadow-md'>
+                                <div className='flex flex-col justify-center items-center text-center p-4 bg-base-200 rounded-box sm:w-md sm:flex-row sm:justify-between sm:text-left sm:items-center shadow-md'>
                                     <div className='flex justify-center'>
                                         <img className="size-15 sm:size-10" src={userStatus.emoji} alt="emoji" />
                                     </div>
                                     <div className='mt-2'>
+                                        <h1 className='font-bold text-sm font-roboto'>{userStatus?.status}</h1>
                                         <h1 className='font-bold text-sm font-roboto'>{userStatus?.status}</h1>
                                         <div className='flex flex-col sm:flex-row mt-2'>
                                             <p className='font-medium text-xs font-roboto sm:mr-2'>Start's from: {userStatus.startTime}</p>
@@ -69,6 +71,30 @@ function Home() {
                     </div>
 
                     {/* Others status  */}
+                    <div className='mt-10'>
+                        <h1 className='font-bold text-md mb-2 font-[roboto]'>Other's status</h1>
+                        <div className='w-full grid grid-cols-1 lg:grid-cols-2 gap-4'>
+                            {
+                                allUserStatus.map((allUserStatus) => (
+                                    <div className='flex flex-col justify-center items-center text-center p-4 bg-base-200 rounded-box 
+                                sm:justify-between sm:w-md sm:flex-row sm:text-left shadow-md'>
+                                        <div className='flex justify-center'>
+                                            <img className="size-15 sm:size-10" src={allUserStatus.emoji} alt="emoji" />
+                                        </div>
+                                        <div className='mt-2'>
+                                            <h1 className='font-bold text-md font-roboto'>{allUserStatus?.userId?.firstName} {allUserStatus?.userId?.lastName}</h1>
+                                            <h1 className='font-bold text-sm font-roboto'>{allUserStatus?.status}</h1>
+                                            <div className='flex flex-col sm:flex-row mt-2'>
+                                                <p className='font-medium text-xs font-roboto sm:mr-2'>Start's from: {allUserStatus.startTime}</p>
+                                                <p className='font-medium text-xs font-roboto sm:ml-2'>End's at: {allUserStatus.endTime}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </>
