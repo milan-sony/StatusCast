@@ -12,6 +12,7 @@ function Signup() {
     const { signup, isSigningUp } = userAuthStore()
 
     const [formData, setFormData] = useState({
+        userName: "",
         firstName: "",
         lastName: "",
         email: "",
@@ -19,27 +20,88 @@ function Signup() {
     })
 
     const validateForm = () => {
-        // Check for empty fields
-        const { firstName, email, password } = formData // destructuring
+        const { userName, firstName, email, password } = formData;
+
+        const usernameRegex = /^(?!.*\.\.)(?!.*\.$)(?!^\.)[a-z0-9._]{1,30}$/;
+
+        if (!userName) {
+            toast.error("Username is required");
+            return false;
+        }
+
+        if (userName.length > 30) {
+            toast.error("Username must be at most 30 characters");
+            return false;
+        }
+
+        if (!/^[a-z0-9._]*$/.test(userName)) {
+            toast.error("Only lowercase letters, numbers, dots, and underscores are allowed");
+            return false;
+        }
+
+        if (userName.includes('..')) {
+            toast.error("Username cannot contain consecutive dots.");
+            return false;
+        }
+
+        if (userName.startsWith('.') || userName.endsWith('.')) {
+            toast.error("Username cannot start or end with a dot.");
+            return false;
+        }
+
+        if (!usernameRegex.test(userName)) {
+            toast.error("Invalid username format");
+            return false;
+        }
+
+        if (!/[a-z0-9]/.test(userName)) {
+            toast.error("Username must contain at least one letter or number");
+            return false;
+        }
+
+        if (/^\d+$/.test(userName)) {
+            toast.error("Username cannot be only numbers");
+            return false;
+        }
 
         if (!firstName) {
-            return toast.error("First name is required")
-        }
-        if (!email) {
-            return toast.error("Email is required")
-        }
-        if (!/\S+@\S+\.\S+/.test(email)) {
-            return toast.error("Invalid email address")
-        }
-        if (!password) {
-            return toast.error("Password is required")
-        }
-        if (password.length < 6) {
-            return toast.error("Password must be at least 6 characters")
+            toast.error("First name is required");
+            return false;
         }
 
-        return true
-    }
+        if (!/^[A-Za-z]+$/.test(firstName)) {
+            toast.error("First name must contain only letters");
+            return false;
+        }
+
+        if (formData.lastName && !/^[A-Za-z]+$/.test(formData.lastName)) {
+            toast.error("Last name must contain only letters");
+            return false;
+        }
+
+        if (!email) {
+            toast.error("Email is required");
+            return false;
+        }
+
+        if (!/\S+@\S+\.\S+/.test(email)) {
+            toast.error("Invalid email address");
+            return false;
+        }
+
+        if (!password) {
+            toast.error("Password is required");
+            return false;
+        }
+
+        if (password.length < 6) {
+            toast.error("Password must be at least 6 characters");
+            return false;
+        }
+
+        return true;
+    };
+
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -49,14 +111,15 @@ function Signup() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const success = validateForm()
-        if (success === true) {
+        const isFormValid = validateForm()
+        if (isFormValid === true) {
             signup(formData, navigate)
+            console.log("Signup formData: ", formData)
         }
     }
 
     return (
-        <div className="w-full h-screen overflow-hidden bg-base-200 flex flex-col">
+        <div className="w-full h-screen bg-base-200">
             <div className="hero h-screen">
                 <div className="hero-content flex-col lg:flex-row-reverse w-full">
                     <div className="text-center lg:text-left">
@@ -66,8 +129,10 @@ function Signup() {
                         </p>
                     </div>
                     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-                        <div className="card-body">
+                        <div className="card-body overflow-y-auto max-h-[300px] sm:max-h-[500px]">
                             <fieldset className="fieldset">
+                                <label className="label font-[roboto]"><span className='text-red-500'>*</span>User Name</label>
+                                <input type="text" className="input" placeholder="User Name" name='userName' value={formData.userName} onChange={handleChange} />
                                 <label className="label font-[roboto]"><span className='text-red-500'>*</span>First Name</label>
                                 <input type="text" className="input" placeholder="First Name" name='firstName' value={formData.firstName} onChange={handleChange} />
                                 <label className="label font-[roboto]">Last Name</label>
@@ -78,7 +143,6 @@ function Signup() {
                                 <label className="input">
                                     <input type={showPassword ? "text" : "password"} placeholder="Password" name='password' value={formData.password} onChange={handleChange} />
                                     <span className="cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
-                                        {/* toggle eye icon */}
                                         {showPassword ? (
                                             <Eye className='size-5' />
                                         ) : (
