@@ -1,10 +1,10 @@
 import { UserRoundPlus } from 'lucide-react'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
-import { userProfileStore } from '../../store/userProfileStore'
+import { userSearchStore } from '../../store/userSearchStore'
 
 function SearchProfile() {
-  const { searchUserProfiles, userProfiles, isLoading } = userProfileStore()
+  const { searchUserProfiles, userProfiles, isLoading } = userSearchStore()
 
   const [formData, setFormData] = useState({
     searchName: ''

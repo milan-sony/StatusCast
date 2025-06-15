@@ -2,7 +2,7 @@ import toast from "react-hot-toast"
 import { create } from 'zustand'
 import axiosInstance from "../lib/Axios"
 
-export const userProfileStore = create((set) => ({
+export const userSearchStore = create((set) => ({
     userProfiles: [],
     isLoading: false,
 
