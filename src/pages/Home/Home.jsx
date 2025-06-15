@@ -26,7 +26,7 @@ function Home() {
                 <div className='pt-[100px] pl-10 pr-10'>
                     <div className='flex flex-col justify-center items-center sm:flex-row sm:justify-between text-center'>
                         <div>
-                            <h1 className='text-xl sm:text-4xl font-bold font-[poppins]'> <span className='capitalize'>Hi {user?.firstName} </span> | <span>{user?.userName}</span> <span className='badge badge-soft badge-success badge-xs'>Online</span></h1>
+                            <h1 className='text-xl sm:text-4xl font-bold font-[poppins]'> <span className='capitalize'>Hi {user?.firstName} </span> | <span className='lowercase'>{user?.userName}</span> <span className='badge badge-soft badge-success badge-xs capitalize'>Online</span></h1>
                         </div>
                         <div className='mt-3'>
                             <Link to={"/search-profile"} className='btn btn-primary btn-soft btn-sm md:btn-md font-[roboto] mr-2'>Find Profile</Link>

@@ -77,20 +77,22 @@ function SearchProfile() {
             </div>
           ) : (
             userProfiles.map((profile) => (
-              <div key={profile?._id} className='w-full flex justify-center p-2'>
-                <div className='flex p-4 bg-base-200 rounded-box w-full max-w-md justify-between items-center shadow-md'>
-                  <div>
-                    <h1 className='font-bold text-sm font-roboto'>{profile?.userName}</h1>
-                    <div className='flex flex-col sm:flex-row mt-2'>
-                      <p className='font-medium text-xs font-roboto sm:mr-2'>{profile?.firstName} {profile?.lastName}</p>
-                      <p className='font-medium text-xs font-roboto sm:ml-2'>{profile?.email}</p>
+              <>
+                <div key={profile?._id} className='w-full flex justify-center p-2'>
+                  <div className='flex p-4 bg-base-200 rounded-box w-full max-w-md justify-between items-center shadow-md'>
+                    <div>
+                      <h1 className='font-bold text-sm font-roboto lowercase'>{profile?.userName}</h1>
+                      <div className='flex flex-col sm:flex-row mt-2'>
+                        <p className='font-medium text-xs font-roboto sm:mr-2 capitalize'>{profile?.firstName} {profile?.lastName}</p>
+                        <p className='font-medium text-xs font-roboto sm:ml-2 lowercase'>{profile?.email}</p>
+                      </div>
                     </div>
+                    <button className="btn btn-sm btn-soft btn-success" aria-label="Add User">
+                      <UserRoundPlus size={15} />
+                    </button>
                   </div>
-                  <button className="btn btn-sm btn-soft btn-success" aria-label="Add User">
-                    <UserRoundPlus size={15} />
-                  </button>
                 </div>
-              </div>
+              </>
             ))
           )}
         </div>
