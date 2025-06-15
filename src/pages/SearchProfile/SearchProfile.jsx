@@ -1,27 +1,44 @@
+import { UserRoundPlus } from 'lucide-react'
 import React, { useState } from 'react'
+import toast from 'react-hot-toast'
+import { userProfileStore } from '../../store/userProfileStore'
 
 function SearchProfile() {
+  const { searchUserProfiles, userProfiles, isLoading } = userProfileStore()
 
-  const [searchName, setSearchName] = useState({
-    searchName: ""
+  const [formData, setFormData] = useState({
+    searchName: ''
   })
 
   const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
 
-    setSearchName({ ...searchName, [e.target.name]: e.target.value })
+  const validateForm = () => {
+    const { searchName } = formData
+    if (!searchName.trim()) {
+      toast.error('Search field is required')
+      return false
+    }
+    return true
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(searchName)
+    const isFormValid = validateForm()
+    if (isFormValid) {
+      searchUserProfiles(formData)
+      setFormData({ searchName: '' })
+    }
   }
 
   return (
-    <div className='w-full h-dvh'>
-      <div className='pt-[100px] pl-10 pr-10'>
+    <div className='w-full h-screen overflow-hidden'>
+      <div className='pt-[100px] px-10'>
 
-        <div className='flex justify-center'>
-          <label className="input">
+        {/* Search Input */}
+        <form onSubmit={handleSubmit} className='flex justify-center gap-2'>
+          <label className="input flex items-center gap-2 w-full max-w-md">
             <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <g
                 strokeLinejoin="round"
@@ -34,31 +51,48 @@ function SearchProfile() {
                 <path d="m21 21-4.3-4.3"></path>
               </g>
             </svg>
-            <input type="search" required placeholder="Search Name" name='searchName' value={searchName.searchName} onChange={handleChange} />
+            <input
+              type="search"
+              required
+              placeholder="Search Name / Username / Email"
+              name="searchName"
+              aria-label="Search by name, username, or email"
+              value={formData.searchName}
+              onChange={handleChange}
+              className="w-full bg-transparent outline-none"
+            />
           </label>
-          <button onClick={handleSubmit} className="btn btn-primary">Search</button>
-        </div>
+          <button type="submit" className="btn btn-primary">Search</button>
+        </form>
 
-        <div className='mt-10'>
-
-          <ul className="list bg-base-100 rounded-box shadow-md">
-
-            <li className="list-row">
-              {/* <div><img className="size-10 rounded-box" src="https://img.daisyui.com/images/profile/demo/1@94.webp" /></div> */}
-              <div>
-                <div>Milan Sony</div>
-                {/* <div className="text-xs uppercase font-semibold opacity-60">Remaining Reason</div> */}
+        {/* Result Section */}
+        <div className='mt-10 max-h-[400px] overflow-y-auto'>
+          {isLoading ? (
+            <div className='w-full flex justify-center mt-10'>
+              <span className="loading loading-spinner text-primary"></span>
+            </div>
+          ) : userProfiles.length === 0 ? (
+            <div className='w-full flex justify-center mt-10'>
+              <p className='font-roboto text-sm opacity-60'>No profile found!</p>
+            </div>
+          ) : (
+            userProfiles.map((profile) => (
+              <div key={profile?._id} className='w-full flex justify-center p-2'>
+                <div className='flex p-4 bg-base-200 rounded-box w-full max-w-md justify-between items-center shadow-md'>
+                  <div>
+                    <h1 className='font-bold text-sm font-roboto'>{profile?.userName}</h1>
+                    <div className='flex flex-col sm:flex-row mt-2'>
+                      <p className='font-medium text-xs font-roboto sm:mr-2'>{profile?.firstName} {profile?.lastName}</p>
+                      <p className='font-medium text-xs font-roboto sm:ml-2'>{profile?.email}</p>
+                    </div>
+                  </div>
+                  <button className="btn btn-sm btn-soft btn-success" aria-label="Add User">
+                    <UserRoundPlus size={15} />
+                  </button>
+                </div>
               </div>
-              {/* <button className="btn btn-square btn-ghost">
-                <svg className="size-[1.2em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor"><path d="M6 3L20 12 6 21 6 3z"></path></g></svg>
-              </button>
-              <button className="btn btn-square btn-ghost">
-                <svg className="size-[1.2em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></g></svg>
-              </button> */}
-            </li>
-
-          </ul>
-
+            ))
+          )}
         </div>
 
       </div>

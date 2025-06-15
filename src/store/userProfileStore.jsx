@@ -4,23 +4,24 @@ import axiosInstance from "../lib/Axios"
 
 export const userProfileStore = create((set) => ({
     userProfiles: [],
+    isLoading: false,
 
     searchUserProfiles: async (data) => {
+        set({ isLoading: true })
         try {
-            console.log("userProfileStore data: ", data)
-
             const res = await axiosInstance.post("/search/search-profile", data)
 
             console.log("userProfileStore res: ", res)
-            
-            if (res.data?.status === 200) {
-                set({
-                    userProfiles: res.data?.message
-                })
-            }
+
+            set({
+                userProfiles: res.data?.message
+            })
+
         } catch (error) {
             console.error("Error in userProfileStore: ", error)
             toast.error(error.response?.data?.message || "Something went wrong")
+        } finally {
+            set({ isLoading: false })
         }
     }
 
