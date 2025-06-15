@@ -59,7 +59,7 @@ function Navbar() {
                                 <details>
                                     <summary>Settings</summary>
                                     <ul className="bg-base-100 rounded-t-none p-2">
-                                        <li><Link to="/link1"><User size={15} />Profile</Link></li>
+                                        <li><Link to="/user-profile"><User size={15} />Profile</Link></li>
                                         <li><button onClick={handleLogout}><LogOut size={15} />Logout</button></li>
                                     </ul>
                                 </details>

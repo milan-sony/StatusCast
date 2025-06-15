@@ -9,6 +9,7 @@ import Home from '../pages/Home/Home'
 import SetStatus from '../pages/SetStatus/SetStatus'
 import SearchProfile from '../pages/SearchProfile/SearchProfile'
 import PageNotFound from '../pages/PageNotFound/PageNotFound'
+import UserProfile from '../pages/UserProfile/UserProfile'
 
 function Router() {
 
@@ -23,6 +24,7 @@ function Router() {
             <Route path='/home' element={<ProtectedRoute><Home /></ProtectedRoute>} />
             <Route path='/set-status' element={<ProtectedRoute><SetStatus /></ProtectedRoute>} />
             <Route path='/search-profile' element={<ProtectedRoute><SearchProfile /></ProtectedRoute>} />
+            <Route path='/user-profile' element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
             <Route path='*' element={<PageNotFound />} />
         </Routes>
     )
