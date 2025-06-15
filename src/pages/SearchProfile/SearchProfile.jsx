@@ -2,9 +2,11 @@ import { UserRoundPlus } from 'lucide-react'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import { userSearchStore } from '../../store/userSearchStore'
+import { userFriendRequestStore } from '../../store/userFriendRequestStore'
 
 function SearchProfile() {
   const { searchUserProfiles, userProfiles, isLoading } = userSearchStore()
+  const { sendRequest } = userFriendRequestStore()
 
   const [formData, setFormData] = useState({
     searchName: ''
@@ -87,7 +89,7 @@ function SearchProfile() {
                         <p className='font-medium text-xs font-roboto sm:ml-2 lowercase'>{profile?.email}</p>
                       </div>
                     </div>
-                    <button className="btn btn-sm btn-soft btn-success" aria-label="Add User">
+                    <button className="btn btn-sm btn-soft btn-success" aria-label="Add User" onClick={() => sendRequest(profile?._id)}>
                       <UserRoundPlus size={15} />
                     </button>
                   </div>
