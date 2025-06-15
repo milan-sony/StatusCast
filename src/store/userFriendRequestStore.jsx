@@ -6,7 +6,8 @@ export const userFriendRequestStore = create((set) => ({
 
     sendRequest: async (id) => {
         try {
-            const res = await axiosInstance.post("/friend-requests/send", id)
+            console.log("userFriendRequestStore id: ", id)
+            const res = await axiosInstance.post("/friend-requests/send", { to: id })
             console.log("userFriendRequestStore res: ", res)
             toast.success(res?.data?.message)
         } catch (error) {
