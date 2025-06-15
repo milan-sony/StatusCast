@@ -11,7 +11,7 @@ import SearchProfile from '../pages/SearchProfile/SearchProfile'
 import PageNotFound from '../pages/PageNotFound/PageNotFound'
 
 function Router() {
-    const {isUserAuthenticated} = userAuthStore()
+    const { isUserAuthenticated } = userAuthStore()
     console.log("router isUserAuthenticated", isUserAuthenticated)
     return (
         <Routes>
