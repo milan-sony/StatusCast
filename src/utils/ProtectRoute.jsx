@@ -3,11 +3,13 @@ import { userAuthStore } from "../store/userAuthStore";
 import { useNavigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children }) => {
-    const { isUserAuthenticated } = userAuthStore()
+    const { isUserAuthenticated, user } = userAuthStore()
     const navigate = useNavigate()
 
+    console.log("protectedrouter isUserAuthenticated", isUserAuthenticated)
+
     useEffect(() => {
-        if (!isUserAuthenticated) {
+        if (!isUserAuthenticated || !user) {
             navigate("/login")
         }
     }, [isUserAuthenticated, navigate])
