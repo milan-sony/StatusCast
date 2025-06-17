@@ -1,6 +1,7 @@
 import toast from "react-hot-toast"
 import { create } from 'zustand'
 import axiosInstance from "../lib/Axios"
+import { data } from "react-router-dom"
 
 export const userFriendRequestStore = create((set) => ({
 
@@ -59,10 +60,27 @@ export const userFriendRequestStore = create((set) => ({
                 from: fromUserId,
                 action
             })
+            set({
+                receivedRequests: []
+            })
             toast.success(res?.data?.message)
             console.log("respondToFriendRequest res: ", res)
         } catch (error) {
             console.error("respondToFriendRequest error: ", error)
+            toast.error(error.response?.data?.message || "Something went wrong")
+        }
+    },
+
+    cancelFriendRequest: async (id) => {
+        try {
+            const res = await axiosInstance.post("/friend-requests/cancel-requests", { to: id })
+            set({
+                sentRequests: []
+            })
+            console.log("cancelFriendRequest", res)
+            toast.success(res?.data?.message)
+        } catch (error) {
+            console.error("cancelFriendRequest error: ", error)
             toast.error(error.response?.data?.message || "Something went wrong")
         }
     }

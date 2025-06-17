@@ -6,7 +6,7 @@ import { userFriendRequestStore } from '../../store/userFriendRequestStore'
 function UserProfile() {
 
     const { user } = userAuthStore()
-    const { isLoading, getReceivedRequests, receivedRequests, getSentRequests, sentRequests, respondToFriendRequest } = userFriendRequestStore()
+    const { isLoading, getReceivedRequests, receivedRequests, getSentRequests, sentRequests, respondToFriendRequest, cancelFriendRequest } = userFriendRequestStore()
 
     console.log("user", user)
 
@@ -82,15 +82,13 @@ function UserProfile() {
                                             </div>
                                         </div>
                                         <button className="btn btn-sm btn-soft btn-error" aria-label="Cancel User">
-                                            <CircleX size={15} onClick={() => respondToFriendRequest(profile?.to?._id, "reject")} />
+                                            <CircleX size={15} onClick={() => cancelFriendRequest(profile?.to?._id)} />
                                         </button>
                                     </div>
                                 </div>
                             </>
                         ))
                     }
-
-
                 </div>
             </div>
         </>
