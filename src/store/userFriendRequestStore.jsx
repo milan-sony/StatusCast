@@ -51,6 +51,20 @@ export const userFriendRequestStore = create((set) => ({
         } finally {
             set({ isLoading: false })
         }
+    },
+
+    respondToFriendRequest: async (fromUserId, action) => {
+        try {
+            const res = await axiosInstance.post("/friend-requests/respond-requests", {
+                from: fromUserId,
+                action
+            })
+            toast.success(res?.data?.message)
+            console.log("respondToFriendRequest res: ", res)
+        } catch (error) {
+            console.error("respondToFriendRequest error: ", error)
+            toast.error(error.response?.data?.message || "Something went wrong")
+        }
     }
 
 }))

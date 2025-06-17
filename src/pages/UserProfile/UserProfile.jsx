@@ -6,7 +6,7 @@ import { userFriendRequestStore } from '../../store/userFriendRequestStore'
 function UserProfile() {
 
     const { user } = userAuthStore()
-    const { isLoading, getReceivedRequests, receivedRequests, getSentRequests, sentRequests } = userFriendRequestStore()
+    const { isLoading, getReceivedRequests, receivedRequests, getSentRequests, sentRequests, respondToFriendRequest } = userFriendRequestStore()
 
     console.log("user", user)
 
@@ -48,7 +48,10 @@ function UserProfile() {
                                             </div>
                                         </div>
                                         <button className="btn btn-sm btn-soft btn-success" aria-label="Accept User">
-                                            <Check size={15} />
+                                            <Check size={15} onClick={() => respondToFriendRequest(profile?.from?._id, "accept")} />
+                                        </button>
+                                        <button className="btn btn-sm btn-soft btn-error" aria-label="Cancel User">
+                                            <CircleX size={15} onClick={() => respondToFriendRequest(profile?.from?._id, "reject")} />
                                         </button>
                                     </div>
                                 </div>
@@ -79,7 +82,7 @@ function UserProfile() {
                                             </div>
                                         </div>
                                         <button className="btn btn-sm btn-soft btn-error" aria-label="Cancel User">
-                                            <CircleX size={15} />
+                                            <CircleX size={15} onClick={() => respondToFriendRequest(profile?.to?._id, "reject")} />
                                         </button>
                                     </div>
                                 </div>
