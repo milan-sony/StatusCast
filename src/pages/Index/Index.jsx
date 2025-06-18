@@ -30,7 +30,7 @@ function Index() {
 
                 <footer className="footer sm:footer-horizontal footer-center bg-base-300 text-base-content p-4">
                     <aside>
-                        <p>Made with 💖 <a className="link link-primary"  href='https://milansony.vercel.app'>Milan Sony</a></p>
+                        <p>Made with 💖 <a className="link link-primary"  href='https://milansony.vercel.app'>MS</a></p>
                     </aside>
                 </footer>
 
