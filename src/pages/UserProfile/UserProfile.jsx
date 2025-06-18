@@ -25,7 +25,7 @@ function UserProfile() {
                         </div>
                     </div>
 
-                    {/*  */}
+                    {/* received requests */}
                     <button className='btn btn-primary' onClick={() => getReceivedRequests()}>Req: Received</button>
                     {
                         isLoading ? (
@@ -47,11 +47,11 @@ function UserProfile() {
                                                 <p className='font-medium text-xs font-roboto sm:ml-2 lowercase'>{profile?.from?.email}</p>
                                             </div>
                                         </div>
-                                        <button className="btn btn-sm btn-soft btn-success" aria-label="Accept User">
-                                            <Check size={15} onClick={() => respondToFriendRequest(profile?.from?._id, "accept")} />
+                                        <button className="btn btn-sm btn-soft btn-success" aria-label="Accept User" onClick={() => respondToFriendRequest(profile?.from?._id, "accept")}>
+                                            <Check size={15} />
                                         </button>
-                                        <button className="btn btn-sm btn-soft btn-error" aria-label="Cancel User">
-                                            <CircleX size={15} onClick={() => respondToFriendRequest(profile?.from?._id, "reject")} />
+                                        <button className="btn btn-sm btn-soft btn-error" aria-label="Cancel User" onClick={() => respondToFriendRequest(profile?.from?._id, "reject")}>
+                                            <CircleX size={15} />
                                         </button>
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@ function UserProfile() {
                         ))
                     }
 
-
+                    {/* Sent request */}
                     <button className='btn btn-primary' onClick={() => getSentRequests()}>Req: Sent</button>
                     {
                         isLoading ? (
@@ -81,8 +81,8 @@ function UserProfile() {
                                                 <p className='font-medium text-xs font-roboto sm:ml-2 lowercase'>{profile?.to?.email}</p>
                                             </div>
                                         </div>
-                                        <button className="btn btn-sm btn-soft btn-error" aria-label="Cancel User">
-                                            <CircleX size={15} onClick={() => cancelFriendRequest(profile?.to?._id)} />
+                                        <button className="btn btn-sm btn-soft btn-error" aria-label="Cancel User" onClick={() => cancelFriendRequest(profile?.to?._id)}>
+                                            <CircleX size={15} />
                                         </button>
                                     </div>
                                 </div>

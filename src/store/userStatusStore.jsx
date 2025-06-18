@@ -6,7 +6,7 @@ export const userStatusStore = create((set) => ({
     statusData: null,
     isStatusSet: false,
     userStatus: null,
-    allUserStatus: [],
+    allFriendsStatus: [],
 
     setStatus: async (data, navigate) => {
         set({ isStatusSet: true })
@@ -65,12 +65,25 @@ export const userStatusStore = create((set) => ({
         }
     },
 
-    getAllUsersStatus: async () => {
+    // getAllUsersStatus: async () => {
+    //     try {
+    //         const res = await axiosInstance.get("status/get-all-status")
+    //         console.log("getAllUsersStatus res: ", res.data?.message)
+    //         set({
+    //             allUserStatus: res.data?.message
+    //         })
+    //     } catch (error) {
+    //         console.error("Del status error: ", error)
+    //         toast.error(error.response?.data?.message || "Something went wrong")
+    //     }
+    // }
+
+    getAllFriendsStatus: async () => {
         try {
-            const res = await axiosInstance.get("status/get-all-status")
-            console.log("getAllUsersStatus res: ", res.data?.message)
+            const res = await axiosInstance.get("status/get-friends-status")
+            console.log("getAllFriendsStatus res: ", res.data?.message)
             set({
-                allUserStatus: res.data?.message
+                allFriendsStatus: res.data?.message
             })
         } catch (error) {
             console.error("Del status error: ", error)

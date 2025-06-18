@@ -7,11 +7,11 @@ import { Trash2 } from 'lucide-react'
 function Home() {
 
     const { user } = userAuthStore()
-    const { getStatus, userStatus, deleteStatus, getAllUsersStatus, allUserStatus } = userStatusStore()
+    const { getStatus, userStatus, deleteStatus, getAllFriendsStatus, allFriendsStatus } = userStatusStore()
 
     useEffect(() => {
         getStatus()
-        getAllUsersStatus()
+        getAllFriendsStatus()
     }, [])
 
     console.log("user: ", user)
@@ -63,19 +63,19 @@ function Home() {
                         </div>
                     </div>
 
-                    {/* Others status  */}
+                    {/* Friends status  */}
                     <div className='mt-10'>
-                        <h1 className='font-bold text-md mb-2 font-[roboto]'>Other's status</h1>
+                        <h1 className='font-bold text-md mb-2 font-[roboto]'>Friends's status</h1>
                         {
-                            allUserStatus.length === 0 ? (
+                            allFriendsStatus.length === 0 ? (
                                 <div className='w-full flex justify-center'>
                                     <p className='font-roboto text-sm opacity-60'>No one has set any status yet!</p>
                                 </div>
                             ) : (
-                                allUserStatus.map((status) => (
-                                    <div className='w-full max-h-[200px] overflow-y-auto p-2 flex justify-center'>
+                                allFriendsStatus.map((status) => (
+                                    <div key={status._id} className='w-full max-h-[200px] overflow-y-auto p-2 flex justify-center'>
                                         <div className='grid grid-cols-1 xl:grid-cols-3 gap-4'>
-                                            <div className='flex flex-col justify-center items-center text-center p-4 bg-base-200 rounded-box sm:justify-between sm:w-sm sm:flex-row sm:text-left shadow-md' key={status._id}>
+                                            <div className='flex flex-col justify-center items-center text-center p-4 bg-base-200 rounded-box sm:justify-between sm:w-sm sm:flex-row sm:text-left shadow-md'>
                                                 <div className='flex justify-center'>
                                                     <img className="size-15 sm:size-10" src={status.emoji} alt="emoji" />
                                                 </div>
