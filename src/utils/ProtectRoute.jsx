@@ -6,8 +6,6 @@ const ProtectedRoute = ({ children }) => {
     const { isUserAuthenticated, user } = userAuthStore()
     const navigate = useNavigate()
 
-    console.log("protectedrouter isUserAuthenticated", isUserAuthenticated)
-
     useEffect(() => {
         if (!isUserAuthenticated || !user) {
             navigate("/login")

@@ -11,8 +11,6 @@ export const userSearchStore = create((set) => ({
         try {
             const res = await axiosInstance.post("/search/search-profile", data)
 
-            console.log("userProfileStore res: ", res)
-
             set({
                 userProfiles: res.data?.message
             })

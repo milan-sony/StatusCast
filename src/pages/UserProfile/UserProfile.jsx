@@ -8,8 +8,6 @@ function UserProfile() {
     const { user } = userAuthStore()
     const { isLoading, getReceivedRequests, receivedRequests, getSentRequests, sentRequests, respondToFriendRequest, cancelFriendRequest } = userFriendRequestStore()
 
-    console.log("user", user)
-
     return (
         <>
             <div className='w-full h-screen'>

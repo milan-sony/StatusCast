@@ -13,9 +13,6 @@ import UserProfile from '../pages/UserProfile/UserProfile'
 
 function Router() {
 
-    const { isUserAuthenticated } = userAuthStore()
-    console.log("router, isUserAuthenticated: ", isUserAuthenticated)
-
     return (
         <Routes>
             <Route path='/' element={<Index />} />

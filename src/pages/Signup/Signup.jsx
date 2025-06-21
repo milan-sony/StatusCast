@@ -114,7 +114,6 @@ function Signup() {
         const isFormValid = validateForm()
         if (isFormValid === true) {
             signup(formData, navigate)
-            console.log("Signup formData: ", formData)
         }
     }
 

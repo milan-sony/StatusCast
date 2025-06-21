@@ -9,7 +9,6 @@ const axiosInstance = axios.create({
 // Add a request interceptor
 axiosInstance.interceptors.request.use((config) => {
     const token = userAuthStore.getState().accessToken;
-    console.log("Axios token", token);
 
     if (token) {
         config.headers['Authorization'] = `Bearer ${token}`;
@@ -29,14 +28,13 @@ axiosInstance.interceptors.response.use(
             try {
                 const refreshURL = `${import.meta.env.VITE_APP_API_URL}/auth/refresh`;
                 const { data } = await axios.get(refreshURL, { withCredentials: true }); // Send a request to refresh the access token
-                console.log("axios data, ", data);
 
                 userAuthStore.getState().setAccessToken(data.accessToken); // Update the accessToken in the Zustand store
                 original.headers['Authorization'] = `Bearer ${data.accessToken}`; // Update the original request with the new access token
 
                 return axiosInstance(original); // Retry the original request
             } catch (error) {
-                console.log("Logging out from axios due to refresh token failure");
+                console.error("Logging out from axios due to refresh token failure");
                 // Handle navigation outside of the interceptor
                 userAuthStore.getState().axiosLogout(); // Log the user out
             }

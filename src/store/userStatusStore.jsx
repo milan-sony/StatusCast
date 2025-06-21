@@ -12,7 +12,6 @@ export const userStatusStore = create((set) => ({
         set({ isStatusSet: true })
 
         try {
-            console.log("data, ", data)
             const res = await axiosInstance.post("/status/set-status", data)
             if (res.data?.status === 201) {
                 set({
@@ -21,7 +20,6 @@ export const userStatusStore = create((set) => ({
                 toast.success(res.data?.message || "Status saved successfully")
                 navigate("/home")
             } else {
-                console.log("setstatus res: ", res)
                 toast.error(res.data?.message || "You have already set one status")
             }
         } catch (error) {
@@ -35,7 +33,6 @@ export const userStatusStore = create((set) => ({
     getStatus: async () => {
         try {
             const res = await axiosInstance.get("/status/get-status")
-            console.log("getStatus res: ", res)
             set({
                 userStatus: res.data?.message
             })
@@ -50,7 +47,6 @@ export const userStatusStore = create((set) => ({
     deleteStatus: async () => {
         try {
             const res = await axiosInstance.delete("/status/delete-status")
-            console.log("Del status res: ", res)
             set({
                 userStatus: null,
                 statusData: null
@@ -68,7 +64,6 @@ export const userStatusStore = create((set) => ({
     // getAllUsersStatus: async () => {
     //     try {
     //         const res = await axiosInstance.get("status/get-all-status")
-    //         console.log("getAllUsersStatus res: ", res.data?.message)
     //         set({
     //             allUserStatus: res.data?.message
     //         })
@@ -81,7 +76,6 @@ export const userStatusStore = create((set) => ({
     getAllFriendsStatus: async () => {
         try {
             const res = await axiosInstance.get("status/get-friends-status")
-            console.log("getAllFriendsStatus res: ", res.data?.message)
             set({
                 allFriendsStatus: res.data?.message
             })

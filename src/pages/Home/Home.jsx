@@ -14,8 +14,6 @@ function Home() {
         getAllFriendsStatus()
     }, [])
 
-    console.log("user: ", user)
-
     const statusDelete = () => {
         deleteStatus()
     }

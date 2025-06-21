@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 function Index() {
 
     return (
-            <div className="w-full h-screen overflow-hidden bg-base-200 flex flex-col">
+            <div className="w-full h-screen bg-base-200 flex flex-col">
                 {/* Main Content */}
-                <div className="flex-grow flex justify-center items-center">
+                <div className="flex-grow flex justify-center items-center mt-[80px] mb-[80px]">
                     <div className="flex flex-col md:flex-row items-center gap-8 max-w-4xl px-4">
 
                         {/* Image */}

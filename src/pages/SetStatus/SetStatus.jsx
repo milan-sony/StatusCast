@@ -86,7 +86,6 @@ function SetStatus() {
             }
 
             setStatus(statusData, navigate)
-            console.log("statusData: ", statusData)
         }
     }
 

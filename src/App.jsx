@@ -55,8 +55,6 @@ function App() {
     }
   }, [setAccessToken, setUserAuthenticate, setLoading, setUser])
 
-  console.log("isLoading:", isLoading)
-
   if (showLoader || isLoading) { // Show loader if either condition is true
     return <PageLoader />
   }

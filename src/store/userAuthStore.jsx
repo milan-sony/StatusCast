@@ -19,7 +19,6 @@ export const userAuthStore = create((set) => ({
     signup: async (data, navigate) => {
         set({ isSigningUp: true })
         try {
-            console.log("data", data)
             const res = await axiosInstance.post("/auth/signup", data)
             if (res.data?.status === 201) {
                 toast.success(res.data?.message || "Account successfully created!")
@@ -72,9 +71,7 @@ export const userAuthStore = create((set) => ({
 
     logout: async (navigate) => {
         try {
-            console.log("logout called")
             const res = await axiosInstance.get("/auth/logout")
-            console.log("Logout res", res)
 
             set({
                 user: null,
@@ -92,9 +89,7 @@ export const userAuthStore = create((set) => ({
 
     axiosLogout: async () => {
         try {
-            console.log("Axios logout called")
             const res = await axiosInstance.get("/auth/logout")
-            console.log("Axios logout res", res)
 
             set({
                 user: null,
