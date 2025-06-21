@@ -9,6 +9,8 @@ function Home() {
     const { user } = userAuthStore()
     const { getStatus, userStatus, deleteStatus, getAllFriendsStatus, allFriendsStatus } = userStatusStore()
 
+    console.log("user :", user)
+
     useEffect(() => {
         getStatus()
         getAllFriendsStatus()

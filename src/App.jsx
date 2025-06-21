@@ -7,7 +7,7 @@ import Navbar from './components/Navbar/Navbar'
 import PageLoader from './components/Loader/PageLoader'
 
 function App() {
-  const { setAccessToken, setUserAuthenticate, setLoading, isLoading, setUser, user } = userAuthStore()
+  const { setAccessToken, setUserAuthenticate, setLoading, isLoading, setUser } = userAuthStore()
   const [showLoader, setShowLoader] = useState(false) // State to control loader visibility
   const loaderDelay = 1000 // Delay in milliseconds
 
@@ -18,8 +18,9 @@ function App() {
       setShowLoader(true) // Show loader immediately
 
       try {
-
         const res = await axiosInstance.get("/auth/refresh", { withCredentials: true })
+
+        console.log("setAccessToken: ", res.data?.accessToken)
 
         setAccessToken(res.data?.accessToken)
         setUserAuthenticate(true)
@@ -27,28 +28,24 @@ function App() {
         // Fetch user profile after refresh success
         const profileRes = await axiosInstance.post("/user/profile")
 
+        console.log("profileRes: ", profileRes)
+
         if (profileRes.data?.status === 200) {
           setUser(profileRes.data?.user)
         }
 
       } catch (error) {
-
         console.error("Not authenticated", error.message)
         setUserAuthenticate(false)
-
       } finally {
-
         setLoading(false) // End loading
         // Set a timeout to hide the loader after the delay
         setTimeout(() => {
           setShowLoader(false)
         }, loaderDelay)
-
       }
     }
-
     checkRefreshToken()
-
     // Cleanup function to clear timeout if the component unmounts
     return () => {
       setShowLoader(false)
